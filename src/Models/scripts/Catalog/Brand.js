@@ -4,7 +4,7 @@ const sequelize = require("../../../Config/sequelizeConnect");
 const Brand = sequelize.define(
   "Brand",
   {
-    id: {
+    brand_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
