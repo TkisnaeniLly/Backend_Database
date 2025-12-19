@@ -23,76 +23,41 @@ const Cart = require("./scripts/Cart/Cart");
 const CartItem = require("./scripts/Cart/CartItem");
 
 // ==================
-// Relasi Auth
+// Relasi Auth (Tetap)
 // ==================
+User.hasOne(UserProfile, { foreignKey: "user_id", onDelete: "CASCADE" });
+UserProfile.belongsTo(User, { foreignKey: "user_id" });
 
-// User -> Profile (1 : 1)
-User.hasOne(UserProfile, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
-UserProfile.belongsTo(User, {
-  foreignKey: "user_id",
-});
+User.hasMany(EmailVerification, { foreignKey: "user_id", onDelete: "CASCADE" });
+EmailVerification.belongsTo(User, { foreignKey: "user_id" });
 
-// User -> EmailVerification (1 : N)
-User.hasMany(EmailVerification, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
-EmailVerification.belongsTo(User, {
-  foreignKey: "user_id",
-});
+User.hasMany(UserLoginDevice, { foreignKey: "user_id", onDelete: "CASCADE" });
+UserLoginDevice.belongsTo(User, { foreignKey: "user_id" });
 
-// User -> Login Device (1 : N)
-User.hasMany(UserLoginDevice, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
-UserLoginDevice.belongsTo(User, {
-  foreignKey: "user_id",
-});
-
-// User -> Login OTP (1 : N)
-User.hasMany(LoginOtp, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
-LoginOtp.belongsTo(User, {
-  foreignKey: "user_id",
-});
-
-// Device -> Login OTP (1 : N)
-UserLoginDevice.hasMany(LoginOtp, {
-  foreignKey: "device_id",
-  sourceKey: "device_id",
-  onDelete: "CASCADE",
-});
-LoginOtp.belongsTo(UserLoginDevice, {
-  foreignKey: "device_id",
-  targetKey: "device_id",
-});
-
-// ==================
-// Relasi Catalog
-// ==================
+// ==========================================
+// Relasi Catalog (DISESUAIKAN KE SCRIPT BARU)
+// ==========================================
 
 // Category -> Product (1 : N)
 Category.hasMany(Product, {
   foreignKey: "category_id",
+  sourceKey: "category_id", // Mengacu pada PK baru di Category.js
   onDelete: "RESTRICT",
 });
 Product.belongsTo(Category, {
   foreignKey: "category_id",
+  targetKey: "category_id",
 });
 
 // Brand -> Product (1 : N)
 Brand.hasMany(Product, {
   foreignKey: "brand_id",
+  sourceKey: "brand_id", // Mengacu pada PK baru di Brand.js
   onDelete: "RESTRICT",
 });
 Product.belongsTo(Brand, {
   foreignKey: "brand_id",
+  targetKey: "brand_id",
 });
 
 // Product -> Media (1 : N)
@@ -114,6 +79,7 @@ Variant.belongsTo(Product, {
 });
 
 // Variant -> Inventory (1 : 1)
+// Catatan: Inventory menggunakan inventory_id sebagai PK, tapi variant_id tetap sebagai FK
 Variant.hasOne(Inventory, {
   foreignKey: "variant_id",
   onDelete: "CASCADE",
@@ -123,58 +89,29 @@ Inventory.belongsTo(Variant, {
 });
 
 // ==================
-// Relasi Cart
+// Relasi Cart (Tetap)
 // ==================
+User.hasMany(Cart, { foreignKey: "user_id", onDelete: "CASCADE" });
+Cart.belongsTo(User, { foreignKey: "user_id" });
 
-// User -> Cart (1 : N)
-User.hasMany(Cart, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
-Cart.belongsTo(User, {
-  foreignKey: "user_id",
-});
+Cart.hasMany(CartItem, { foreignKey: "cart_id", onDelete: "CASCADE" });
+CartItem.belongsTo(Cart, { foreignKey: "cart_id" });
 
-// Cart -> CartItem (1 : N)
-Cart.hasMany(CartItem, {
-  foreignKey: "cart_id",
-  onDelete: "CASCADE",
-});
-CartItem.belongsTo(Cart, {
-  foreignKey: "cart_id",
-});
+Variant.hasMany(CartItem, { foreignKey: "variant_id", onDelete: "CASCADE" });
+CartItem.belongsTo(Variant, { foreignKey: "variant_id" });
 
-// Variant -> CartItem (1 : N)
-Variant.hasMany(CartItem, {
-  foreignKey: "variant_id",
-  onDelete: "RESTRICT",
-});
-CartItem.belongsTo(Variant, {
-  foreignKey: "variant_id",
-});
-
-// ==================
-// Export
-// ==================
 module.exports = {
-  sequelize,
-
-  // Auth
   User,
   UserProfile,
   EmailVerification,
   UserLoginDevice,
   LoginOtp,
-
-  // Catalog
   Product,
   Category,
   Brand,
   Media,
   Variant,
   Inventory,
-
-  // Cart
   Cart,
   CartItem,
 };
