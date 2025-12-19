@@ -4,7 +4,7 @@ const sequelize = require("../../../Config/sequelizeConnect");
 const Category = sequelize.define(
   "Category",
   {
-    id: {
+    category_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
