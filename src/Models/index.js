@@ -5,7 +5,6 @@ const sequelize = require("../Config/sequelizeConnect");
 // ==================
 // Auth
 const User = require("./scripts/Auth/User");
-const UserProfile = require("./scripts/Auth/UserProfile");
 const EmailVerification = require("./scripts/Auth/EmailVerification");
 const UserLoginDevice = require("./scripts/Auth/UserLoginDevice");
 const LoginOtp = require("./scripts/Auth/LoginOtp");
@@ -23,17 +22,12 @@ const Cart = require("./scripts/Cart/Cart");
 const CartItem = require("./scripts/Cart/CartItem");
 
 // ==================
-// Relasi Auth
+// Relasi Auth (Updated)
 // ==================
 
-// User -> Profile (1 : 1)
-User.hasOne(UserProfile, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
-UserProfile.belongsTo(User, {
-  foreignKey: "user_id",
-});
+/** * User -> Profile (DIHAPUS)
+ * Sesuai DATABASE_OVERVIEW.md, tabel User dan Customer (Profile) sudah digabung.
+ */
 
 // User -> EmailVerification (1 : N)
 User.hasMany(EmailVerification, {
@@ -62,29 +56,9 @@ LoginOtp.belongsTo(User, {
   foreignKey: "user_id",
 });
 
-// Device -> Login OTP (1 : N)
-UserLoginDevice.hasMany(LoginOtp, {
-  foreignKey: "device_id",
-  sourceKey: "device_id",
-  onDelete: "CASCADE",
-});
-LoginOtp.belongsTo(UserLoginDevice, {
-  foreignKey: "device_id",
-  targetKey: "device_id",
-});
-
 // ==================
-// Relasi Catalog
+// Relasi Catalog & Cart (Tetap)
 // ==================
-
-// Category -> Product (1 : N)
-Category.hasMany(Product, {
-  foreignKey: "category_id",
-  onDelete: "RESTRICT",
-});
-Product.belongsTo(Category, {
-  foreignKey: "category_id",
-});
 
 // Brand -> Product (1 : N)
 Brand.hasMany(Product, {
@@ -122,10 +96,6 @@ Inventory.belongsTo(Variant, {
   foreignKey: "variant_id",
 });
 
-// ==================
-// Relasi Cart
-// ==================
-
 // User -> Cart (1 : N)
 User.hasMany(Cart, {
   foreignKey: "user_id",
@@ -144,37 +114,18 @@ CartItem.belongsTo(Cart, {
   foreignKey: "cart_id",
 });
 
-// Variant -> CartItem (1 : N)
-Variant.hasMany(CartItem, {
-  foreignKey: "variant_id",
-  onDelete: "RESTRICT",
-});
-CartItem.belongsTo(Variant, {
-  foreignKey: "variant_id",
-});
-
-// ==================
-// Export
-// ==================
 module.exports = {
   sequelize,
-
-  // Auth
   User,
-  UserProfile,
   EmailVerification,
   UserLoginDevice,
   LoginOtp,
-
-  // Catalog
   Product,
   Category,
   Brand,
   Media,
   Variant,
   Inventory,
-
-  // Cart
   Cart,
   CartItem,
 };
