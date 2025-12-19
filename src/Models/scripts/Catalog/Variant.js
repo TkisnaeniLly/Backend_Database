@@ -4,7 +4,7 @@ const sequelize = require("../../../Config/sequelizeConnect");
 const Variant = sequelize.define(
   "Variant",
   {
-    id: {
+    variant_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -15,11 +15,11 @@ const Variant = sequelize.define(
     },
     variant_type: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: false, // Contoh: Warna, Ukuran
     },
     variant_value: {
       type: DataTypes.STRING(50),
-      allowNull: false,
+      allowNull: false, // Contoh: Merah, XL
     },
     price: {
       type: DataTypes.DECIMAL(12, 2),
