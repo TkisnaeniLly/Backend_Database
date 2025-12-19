@@ -4,7 +4,7 @@ const sequelize = require("../../../Config/sequelizeConnect");
 const Inventory = sequelize.define(
   "Inventory",
   {
-    id: {
+    inventory_id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
       autoIncrement: true,
@@ -12,6 +12,10 @@ const Inventory = sequelize.define(
     variant_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+    },
+    location_id: {
+      type: DataTypes.INTEGER,
+      allowNull: true, // Berdasarkan relasi Lokasi Operasional di overview
     },
     stock_qty: {
       type: DataTypes.INTEGER,
@@ -30,7 +34,7 @@ const Inventory = sequelize.define(
     tableName: "inventories",
     timestamps: true,
     createdAt: "created_at",
-    updatedAt: "updated_at",
+    updatedAt: "last_updated", // Sesuai dengan penamaan di dokumen overview
   }
 );
 
