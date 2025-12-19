@@ -12,6 +12,7 @@ const EmailVerification = sequelize.define(
     user_id: {
       type: DataTypes.INTEGER,
       allowNull: false,
+      references: { model: 'users', key: 'user_id' }
     },
     token_hash: {
       type: DataTypes.STRING,
