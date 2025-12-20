@@ -22,6 +22,10 @@ const Inventory = require("./scripts/Catalog/Inventory");
 const Cart = require("./scripts/Cart/Cart");
 const CartItem = require("./scripts/Cart/CartItem");
 
+// Checkout
+const Checkout = require("./scripts/Checkout/Checkout");
+const CheckoutTracking = require("./scripts/Checkout/CheckoutTracking");
+
 // ==================
 // Relasi Auth
 // ==================
@@ -154,6 +158,37 @@ CartItem.belongsTo(Variant, {
 });
 
 // ==================
+// Relasi Checkout
+// ==================
+
+// User -> Checkout (1 : N)
+User.hasMany(Checkout, {
+  foreignKey: "user_id",
+  onDelete: "RESTRICT",
+});
+Checkout.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+// Cart -> Checkout (1 : 1)
+Cart.hasOne(Checkout, {
+  foreignKey: "cart_id",
+  onDelete: "RESTRICT",
+});
+Checkout.belongsTo(Cart, {
+  foreignKey: "cart_id",
+});
+
+// Checkout -> CheckoutTracking (1 : N)
+Checkout.hasMany(CheckoutTracking, {
+  foreignKey: "checkout_id",
+  onDelete: "CASCADE",
+});
+CheckoutTracking.belongsTo(Checkout, {
+  foreignKey: "checkout_id",
+});
+
+// ==================
 // Export
 // ==================
 module.exports = {
@@ -177,4 +212,8 @@ module.exports = {
   // Cart
   Cart,
   CartItem,
+
+  // Checkout
+  Checkout,
+  CheckoutTracking,
 };

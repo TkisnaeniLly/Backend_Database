@@ -39,7 +39,8 @@ const Login = async (req, res) => {
 
     const device_id = crypto
       .createHash("sha256")
-      .update(`${ipAddress}-${userAgent}`)
+      // Include user.email to ensure device_id is unique per user
+      .update(`${ipAddress}-${userAgent}-${email}`)
       .digest("hex")
       .substring(0, 32);
 

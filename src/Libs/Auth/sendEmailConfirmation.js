@@ -16,7 +16,12 @@ const sendEmailConfirmation = async (userId) => {
       expired_at: expiredAt,
     });
 
-    const verifyLink = `${process.env.APP_URL}/auth/verify-email?token=${token}`;
+    const baseUrl =
+      process.env.NODE_ENV === "production"
+        ? process.env.APP_URL_PRODUCTION
+        : process.env.APP_URL;
+
+    const verifyLink = `${baseUrl}/auth/verify-email?token=${token}`;
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
       port: process.env.SMTP_PORT,

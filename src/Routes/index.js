@@ -32,4 +32,28 @@ router.delete(
   authorizeRole(["user"]),
   app.deleteCartItem
 );
+router.post(
+  "/checkout",
+  authenticated,
+  authorizeRole(["user"]),
+  app.processCheckout
+);
+router.get(
+  "/checkout",
+  authenticated,
+  authorizeRole(["user"]),
+  app.getCheckoutHistory
+);
+router.get(
+  "/checkout/:id",
+  authenticated,
+  authorizeRole(["user"]),
+  app.getCheckoutDetail
+);
+router.get(
+  "/checkout/:id/tracking",
+  authenticated,
+  authorizeRole(["user"]),
+  app.getCheckoutTracking
+);
 module.exports = router;

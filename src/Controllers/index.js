@@ -68,6 +68,25 @@ const deleteCartItemPage = require("./Cart/deleteCartItem");
 const deleteCartItem = async (req, res) => {
   return deleteCartItemPage(req, res);
 };
+
+//! Checkout
+const getCheckoutHistoryPage = require("./Checkout/getCheckoutHistory");
+const getCheckoutHistory = async (req, res) => {
+  return getCheckoutHistoryPage(req, res);
+};
+const getCheckoutDetailPage = require("./Checkout/getCheckoutDetail");
+const getCheckoutDetail = async (req, res) => {
+  return getCheckoutDetailPage(req, res);
+};
+const getCheckoutTrackingPage = require("./Checkout/getCheckoutTracking");
+const getCheckoutTracking = async (req, res) => {
+  return getCheckoutTrackingPage(req, res);
+};
+
+const processCheckoutPage = require("./Checkout/processCheckout");
+const processCheckout = async (req, res) => {
+  return processCheckoutPage(req, res);
+};
 module.exports = {
   home,
   register,
@@ -83,5 +102,10 @@ module.exports = {
   addToCart,
   getMyCart,
   updateCartItem,
+
   deleteCartItem,
+  processCheckout,
+  getCheckoutHistory,
+  getCheckoutDetail,
+  getCheckoutTracking,
 };
