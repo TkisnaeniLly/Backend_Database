@@ -17,6 +17,7 @@ const Brand = require("./scripts/Catalog/Brand");
 const Media = require("./scripts/Catalog/Media");
 const Variant = require("./scripts/Catalog/Variant");
 const Inventory = require("./scripts/Catalog/Inventory");
+const ProductCategory = require("./scripts/Catalog/ProductCategory");
 
 // Cart
 const Cart = require("./scripts/Cart/Cart");
@@ -88,6 +89,20 @@ Category.hasMany(Product, {
 });
 Product.belongsTo(Category, {
   foreignKey: "category_id",
+});
+
+// Many-to-Many: Product <-> Category via product_categories
+Product.belongsToMany(Category, {
+  through: ProductCategory,
+  foreignKey: "product_id",
+  otherKey: "category_id",
+  as: "CategoriesM2M",
+});
+Category.belongsToMany(Product, {
+  through: ProductCategory,
+  foreignKey: "category_id",
+  otherKey: "product_id",
+  as: "ProductsM2M",
 });
 
 // Brand -> Product (1 : N)
@@ -204,6 +219,7 @@ module.exports = {
   // Catalog
   Product,
   Category,
+  ProductCategory,
   Brand,
   Media,
   Variant,

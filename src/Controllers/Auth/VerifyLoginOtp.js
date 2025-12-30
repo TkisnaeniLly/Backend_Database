@@ -73,12 +73,13 @@ const VerifyLoginOtp = async (req, res) => {
       });
     }
 
-    await user.increment("token_version");
-    await user.reload();
+    // FIX: Do NOT increment token_version on every login to prevent invalidating other sessions
+    // await user.increment("token_version");
+    // await user.reload();
 
-    console.log(
-      `🔄 Token version updated: user_id=${user.user_id}, new_version=${user.token_version}`
-    );
+    // console.log(
+    //   `🔄 Token version updated: user_id=${user.user_id}, new_version=${user.token_version}`
+    // );
 
     await otpData.update({ is_used: true });
     await UserLoginDevice.update(
@@ -95,7 +96,9 @@ const VerifyLoginOtp = async (req, res) => {
     );
 
     await user.update({ last_login: new Date() });
-    const token = jwt.sign(
+
+    // Access Token: 10 menit
+    const accessToken = jwt.sign(
       {
         user_id: user.user_id,
         email: user.email,
@@ -103,8 +106,32 @@ const VerifyLoginOtp = async (req, res) => {
         token_version: user.token_version,
       },
       process.env.JWT_SECRET,
-      { expiresIn: "1d" }
+      { expiresIn: "10m" }
     );
+
+    // Refresh Token: 1 day or 30 days
+    const rememberMe = req.body.remember_me || false;
+    const refreshTokenExpiry = rememberMe ? "30d" : "1d";
+
+    const refreshToken = jwt.sign(
+      {
+        user_id: user.user_id,
+        email: user.email,
+        token_version: user.token_version,
+        device_id: device_id,
+        type: "refresh",
+      },
+      process.env.JWT_SECRET,
+      { expiresIn: refreshTokenExpiry }
+    );
+
+    // Set Refresh Token in HttpOnly Cookie
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+      maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000, // 30 days or 1 day
+    });
 
     console.log(
       `✅ Login berhasil: user_id=${user.user_id}, token_version=${user.token_version}`
@@ -114,14 +141,14 @@ const VerifyLoginOtp = async (req, res) => {
       statusCode: 200,
       message: "Login berhasil.",
       data: {
-        token,
+        token: accessToken, // Frontend expects "token"
         user: {
           user_id: user.user_id,
           email: user.email,
           full_name: user.full_name,
           role: user.role,
         },
-        expires_in: "1 hari",
+        expires_in: "10 menit",
       },
     });
   } catch (error) {

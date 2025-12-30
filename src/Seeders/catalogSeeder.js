@@ -6,6 +6,10 @@ const {
   Media,
   Variant,
   Inventory,
+  Cart,
+  CartItem,
+  Checkout,
+  CheckoutTracking,
 } = require("../Models");
 
 const catalogSeeder = async () => {
@@ -19,8 +23,14 @@ const catalogSeeder = async () => {
 
     // =========================
     // CLEAR DATA (PAKAI DELETE, BUKAN TRUNCATE)
-    // URUTAN CHILD -> PARENT
+    // URUTAN CHILD -> PARENT (hati-hati FK di Cart/Checkout)
     // =========================
+    // Delete checkout tracking -> checkout -> cart items -> cart
+    await CheckoutTracking.destroy({ where: {}, transaction });
+    await Checkout.destroy({ where: {}, transaction });
+    await CartItem.destroy({ where: {}, transaction });
+    await Cart.destroy({ where: {}, transaction });
+    // Then catalog-specific children
     await Inventory.destroy({ where: {}, transaction });
     await Variant.destroy({ where: {}, transaction });
     await Media.destroy({ where: {}, transaction });

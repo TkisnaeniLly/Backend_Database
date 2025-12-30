@@ -18,9 +18,32 @@ app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 app.use(cookieParser());
 app.use(Log("semua"));
+// const allowedOrigins = process.env.ALLOWED_ORIGIN
+//   .split(",")
+//   .map(origin => origin.trim());
+
+// app.use(
+//   cors({
+//     origin: function (origin, callback) {
+//       // allow server-to-server / curl / postman
+//       if (!origin) return callback(null, true);
+
+//       if (allowedOrigins.includes(origin)) {
+//         return callback(null, true);
+//       }
+
+//       return callback(new Error("Not allowed by CORS"));
+//     },
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     allowedHeaders: ["Content-Type", "Authorization"],
+//     credentials: true,
+//   })
+// );
+
 app.use(
   cors({
-    origin: process.env.ALLOWED_ORIGIN,
+    origin: process.env.ALLOWED_ORIGIN.split(","),
+    // origin: process.env.ALLOWED_ORIGIN,
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,

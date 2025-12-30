@@ -5,8 +5,9 @@ async function syncDatabase() {
     await sequelize.authenticate();
     console.log("✅ Koneksi database berhasil");
 
+    // Use alter:true to apply model changes (add columns like `is_featured`)
     await sequelize.sync({
-      alter: false,
+      alter: true,
       force: false,
     });
 

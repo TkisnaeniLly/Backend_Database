@@ -51,6 +51,11 @@ const getProductBySlug = async (req, res) => {
   return getProductBySlugPage(req, res);
 };
 
+const getFeaturedProductsPage = require("./Product/getFeaturedProducts");
+const getFeaturedProducts = async (req, res) => {
+  return getFeaturedProductsPage(req, res);
+};
+
 //! Cart
 const addToCartPage = require("./Cart/addToCart");
 const addToCart = async (req, res) => {
@@ -87,6 +92,12 @@ const processCheckoutPage = require("./Checkout/processCheckout");
 const processCheckout = async (req, res) => {
   return processCheckoutPage(req, res);
 };
+
+const refreshTokenPage = require("./Auth/RefreshToken");
+const refreshToken = async (req, res) => {
+  return refreshTokenPage(req, res);
+};
+
 module.exports = {
   home,
   register,
@@ -95,10 +106,12 @@ module.exports = {
   verifyLogin,
   logout,
   logoutAll,
+  refreshToken,
   getUserDevices,
   revokeDevice,
   catalog,
   getProductBySlug,
+  getFeaturedProducts,
   addToCart,
   getMyCart,
   updateCartItem,

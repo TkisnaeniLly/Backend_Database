@@ -95,9 +95,11 @@ const authenticated = async (req, res, next) => {
       ipAddress = ipAddress.substring(7);
     }
     const userAgent = req.headers["user-agent"] || "unknown";
+
+    // FIX: Generate device_id matching Login logic (IP + UserAgent + Email)
     const device_id = crypto
       .createHash("sha256")
-      .update(`${ipAddress}-${userAgent}`)
+      .update(`${ipAddress}-${userAgent}-${user.email}`)
       .digest("hex")
       .substring(0, 32);
 
@@ -113,14 +115,17 @@ const authenticated = async (req, res, next) => {
 
     console.log("🔍 Device found:", device ? "YES" : "NO");
 
+    // Allow weak verification for dev if needed, but for now enforce strict
     if (!device) {
       console.warn(
         `⛔ Device tidak terverifikasi: user_id=${user.user_id}, device_id=${device_id}`
       );
+      // Don't clear cookie strictly here, let client handle 401? actually clear cookie is fine if session invalid
       res.clearCookie("authToken");
       return res.status(401).json({
         statusCode: 401,
-        message: "Sesi Anda telah berakhir. Silakan login kembali.",
+        message:
+          "Sesi Anda tidak valid atau login dari perangkat baru. Silakan login kembali.",
         data: null,
       });
     }
@@ -132,7 +137,7 @@ const authenticated = async (req, res, next) => {
       device_id: device_id,
     };
 
-    console.log("✅ Authenticated:", req.user);
+    // console.log("✅ Authenticated:", req.user);
     next();
   } catch (error) {
     console.error("❌ Middleware Auth Error:", error);

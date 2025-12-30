@@ -1,9 +1,5 @@
 const response = require("response");
-const Product = require("../../Models/scripts/Catalog/Product");
-const Category = require("../../Models/scripts/Catalog/Category");
-const Brand = require("../../Models/scripts/Catalog/Brand");
-const Media = require("../../Models/scripts/Catalog/Media");
-const Variant = require("../../Models/scripts/Catalog/Variant");
+const { Product, Category, Brand, Media, Variant } = require("../../Models");
 
 const getCatalog = async (req, res) => {
   try {
@@ -12,9 +8,12 @@ const getCatalog = async (req, res) => {
     const products = await Product.findAll({
       where: { status: "ACTIVE" },
       include: [
+        // include many-to-many categories via product_categories
         {
           model: Category,
+          as: "CategoriesM2M",
           attributes: ["id", "category_name"],
+          through: { attributes: [] },
         },
         {
           model: Brand,
@@ -36,11 +35,19 @@ const getCatalog = async (req, res) => {
     const formattedProducts = products.map((product) => {
       const data = product.toJSON();
 
+      // normalize Media full url
       if (Array.isArray(data.Media)) {
         data.Media = data.Media.map((media) => ({
           ...media,
           media_url: `${baseUrl}${media.media_url}`,
         }));
+      }
+
+      // ensure categories returned as `CategoriesM2M` array (many-to-many)
+      if (!Array.isArray(data.CategoriesM2M) && data.Category) {
+        // fallback: keep legacy Category as single-element array
+        data.CategoriesM2M = [data.Category];
+        delete data.Category;
       }
 
       return data;

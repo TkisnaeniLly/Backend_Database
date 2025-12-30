@@ -37,6 +37,11 @@ const Product = sequelize.define(
       type: DataTypes.TEXT,
       allowNull: true,
     },
+    is_featured: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+    },
     status: {
       type: DataTypes.ENUM("ACTIVE", "INACTIVE", "DRAFT"),
       defaultValue: "ACTIVE",

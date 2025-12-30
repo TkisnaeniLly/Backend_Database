@@ -1,11 +1,12 @@
 const response = require("response");
-
-const Product = require("../../Models/scripts/Catalog/Product");
-const Category = require("../../Models/scripts/Catalog/Category");
-const Brand = require("../../Models/scripts/Catalog/Brand");
-const Media = require("../../Models/scripts/Catalog/Media");
-const Variant = require("../../Models/scripts/Catalog/Variant");
-const Inventory = require("../../Models/scripts/Catalog/Inventory");
+const {
+  Product,
+  Category,
+  Brand,
+  Media,
+  Variant,
+  Inventory,
+} = require("../../Models");
 
 const getProductBySlug = async (req, res) => {
   try {
@@ -27,7 +28,9 @@ const getProductBySlug = async (req, res) => {
       include: [
         {
           model: Category,
+          as: "CategoriesM2M",
           attributes: ["id", "category_name"],
+          through: { attributes: [] },
         },
         {
           model: Brand,
@@ -59,10 +62,26 @@ const getProductBySlug = async (req, res) => {
       });
     }
 
+    // normalize to JSON and media full URL
+    const baseUrl = `${req.protocol}://${req.get("host")}`;
+    const data = product.toJSON();
+    if (Array.isArray(data.Media)) {
+      data.Media = data.Media.map((m) => ({
+        ...m,
+        media_url: `${baseUrl}${m.media_url}`,
+      }));
+    }
+
+    // prefer `CategoriesM2M` array (many-to-many). If only legacy `Category` exists, convert.
+    if (!Array.isArray(data.CategoriesM2M) && data.Category) {
+      data.CategoriesM2M = [data.Category];
+      delete data.Category;
+    }
+
     response(res, {
       statusCode: 200,
       message: "Detail produk",
-      data: product,
+      data,
     });
   } catch (error) {
     console.error(error);

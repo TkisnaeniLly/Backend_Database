@@ -9,6 +9,7 @@ router.post("/auth/register", app.register);
 router.get("/auth/verify-email", app.verifyEmail);
 router.post("/auth/login", app.login);
 router.put("/auth/verify-login", app.verifyLogin);
+router.post("/auth/refresh", app.refreshToken);
 router.delete("/auth/logout", authenticated, app.logout);
 router.delete("/auth/logout-all", app.logoutAll);
 router.get("/auth/get-user-devices", app.getUserDevices);
@@ -17,6 +18,8 @@ router.delete("/auth/revoke-device", app.revokeDevice);
 router.get("/", app.home);
 router.get("/catalog", app.catalog);
 router.get("/product", app.catalog);
+router.get("/catalog/featured", app.getFeaturedProducts);
+router.get("/product/featured", app.getFeaturedProducts);
 router.get("/catalog/:slug", app.getProductBySlug);
 router.get("/product/:slug", app.getProductBySlug);
 // Users => Home
