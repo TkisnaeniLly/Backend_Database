@@ -31,7 +31,7 @@ const ResetPassword = sequelize.define(
         },
     },
     {
-        tableName: "reset_password",
+        tableName: "reset_token",
         timestamps: true,
     }
 );

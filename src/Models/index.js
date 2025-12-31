@@ -9,6 +9,7 @@ const UserProfile = require("./scripts/Auth/UserProfile");
 const EmailVerification = require("./scripts/Auth/EmailVerification");
 const UserLoginDevice = require("./scripts/Auth/UserLoginDevice");
 const LoginOtp = require("./scripts/Auth/LoginOtp");
+const ResetPassword = require("./scripts/Auth/ResetPassword");
 
 // Catalog
 const Product = require("./scripts/Catalog/Product");
@@ -64,6 +65,15 @@ User.hasMany(LoginOtp, {
   onDelete: "CASCADE",
 });
 LoginOtp.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+// User -> Reset Password (1 : N)
+User.hasMany(ResetPassword, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
+ResetPassword.belongsTo(User, {
   foreignKey: "user_id",
 });
 
@@ -215,6 +225,7 @@ module.exports = {
   EmailVerification,
   UserLoginDevice,
   LoginOtp,
+  ResetPassword,
 
   // Catalog
   Product,

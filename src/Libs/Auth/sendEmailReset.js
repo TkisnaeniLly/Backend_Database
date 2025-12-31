@@ -1,5 +1,6 @@
 const crypto = require("crypto");
-const { EmailVerification, User } = require("../../Models");
+const bcrypt = require("bcrypt");
+const { EmailVerification, User, ResetPassword } = require("../../Models");
 const nodemailer = require("nodemailer");
 
 const sendEmailReset = async (userId) => {
@@ -16,7 +17,15 @@ const sendEmailReset = async (userId) => {
       expired_at: expiredAt,
     });
 
-    //TODO: save user_id + token ke database
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+
+    // Save user_id + token + otp to ResetPassword table
+    await ResetPassword.create({
+      user_id: user.user_id,
+      token: token,
+      otp_code: otp,
+      expired_at: expiredAt,
+    });
 
     const baseUrl =
       process.env.NODE_ENV === "production"
@@ -24,6 +33,7 @@ const sendEmailReset = async (userId) => {
         : process.env.APP_URL;
 
     // TODO : bikin endpoint reset password, method put
+
     const verifyLink = `${baseUrl}/api/auth/reset-password?token=${token}`;
     const transporter = nodemailer.createTransport({
       host: process.env.SMTP_HOST,
