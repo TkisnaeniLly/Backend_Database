@@ -40,6 +40,10 @@ const revokeDevicePage = require("./Auth/RevokeDevice");
 const revokeDevice = async (req, res) => {
   return revokeDevicePage(req, res);
 };
+const ResetPasswordPage = require("./Auth/ResetPassword");
+const resetPassword = async (req, res) => {
+  return ResetPasswordPage(req, res);
+};
 
 //! Product
 const catalogPage = require("./Product/getCatalog");
@@ -100,6 +104,7 @@ const refreshToken = async (req, res) => {
 
 module.exports = {
   home,
+  // Auth
   register,
   verifyEmail,
   login,
@@ -109,13 +114,15 @@ module.exports = {
   refreshToken,
   getUserDevices,
   revokeDevice,
+  resetPassword,
+  // Product
   catalog,
   getProductBySlug,
   getFeaturedProducts,
+  // Cart
   addToCart,
   getMyCart,
   updateCartItem,
-
   deleteCartItem,
   processCheckout,
   getCheckoutHistory,

@@ -14,6 +14,7 @@ router.delete("/auth/logout", authenticated, app.logout);
 router.delete("/auth/logout-all", app.logoutAll);
 router.get("/auth/get-user-devices", app.getUserDevices);
 router.delete("/auth/revoke-device", app.revokeDevice);
+router.post("/auth/request-reset-password", app.resetPassword);
 // Public
 router.get("/", app.home);
 router.get("/catalog", app.catalog);
