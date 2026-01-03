@@ -49,11 +49,7 @@ Agar aplikasi dapat berjalan, kita perlu mengatur variabel lingkungan (environme
   ```
 - **Isi Data Awal (Seeding)**: Jalankan perintah berikut satu per satu untuk mengisi data awal (dummy data) agar aplikasi tidak kosong:
   ```bash
-  node ./src/Seeders/catalogMultiCategorySeeder.js
-  node ./src/Seeders/catalogSeeder.js
-  node ./src/Seeders/featuredProductSeeder.js
-  node ./src/Seeders/productsMultiCategorySeeder.js
-  node ./src/Seeders/seed100Products.js
+  node ./src/Seeders/unifiedProductSeeder.js
   ```
 
 ### 3. Konfigurasi Email (SMTP)
