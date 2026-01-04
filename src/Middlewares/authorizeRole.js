@@ -29,7 +29,7 @@ const authorizeRole = (allowedRoles = []) => {
         });
       }
 
-      console.log(`✅ Authorized: ${userRole} -> [${allowedRoles.join(", ")}]`);
+      // console.log(`✅ Authorized: ${userRole} -> [${allowedRoles.join(", ")}]`);
       next();
     } catch (error) {
       console.error("❌ Authorization Error:", error);

@@ -13,8 +13,8 @@ const getUserProfile = async (req, res) => {
       },
     });
 
-    console.log("User ID : ", user_id);
-    console.log("Data User : ", user);
+    // console.log("User ID : ", user_id);
+    // console.log("Data User : ", user);
 
     if (!user) {
       return response(res, {

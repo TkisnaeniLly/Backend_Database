@@ -6,6 +6,10 @@ const userProfilePage = require("./Home/userProfile");
 const userProfile = async (req, res) => {
   return userProfilePage(req, res);
 };
+const editUserPage = require("./Home/editUser");
+const editUser = async (req, res) => {
+  return editUserPage(req, res);
+};
 
 //! Auth
 const registerPage = require("./Auth/Register");
@@ -132,6 +136,7 @@ module.exports = {
   // User
   home,
   userProfile,
+  editUser,
   // Auth
   register,
   verifyEmail,

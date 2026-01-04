@@ -3,6 +3,7 @@ const router = express.Router();
 const app = require("../Controllers/index");
 const authenticated = require("../Middlewares/authenticated");
 const authorizeRole = require("../Middlewares/authorizeRole");
+const upload = require("../Middlewares/multer");
 
 // Auth
 router.post("/auth/register", app.register);
@@ -30,6 +31,13 @@ router.get("/product/:slug", app.getProductBySlug);
 router.get("/home", authenticated, authorizeRole(["user"]), app.home);
 router.get("/beranda", authenticated, authorizeRole(["user"]), app.home);
 router.put("/profile", authenticated, authorizeRole(["user"]), app.userProfile);
+router.post(
+  "/profile",
+  authenticated,
+  authorizeRole(["user"]),
+  upload.single("avatar"),
+  app.editUser
+);
 // User => Cart
 router.get("/cart", authenticated, authorizeRole(["user"]), app.getMyCart);
 router.post("/cart", authenticated, authorizeRole(["user"]), app.addToCart);

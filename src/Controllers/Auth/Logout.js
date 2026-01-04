@@ -40,9 +40,9 @@ const Logout = async (req, res) => {
       sameSite: "strict",
     });
 
-    console.log(
-      `✅ Logout berhasil: user_id=${user_data.user_id}, device_id=${device_id}`
-    );
+    // console.log(
+    //   `✅ Logout berhasil: user_id=${user_data.user_id}, device_id=${device_id}`
+    // );
 
     return response(res, {
       statusCode: 200,

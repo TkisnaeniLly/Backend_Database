@@ -109,6 +109,7 @@ const VerifyLoginOtp = async (req, res) => {
       { expiresIn: "10m" }
     );
 
+    // console.log("✅ Access Token set : ", accessToken);
     // Refresh Token: 1 day or 30 days
     const rememberMe = req.body.remember_me || false;
     const refreshTokenExpiry = rememberMe ? "30d" : "1d";
@@ -132,10 +133,11 @@ const VerifyLoginOtp = async (req, res) => {
       sameSite: "strict",
       maxAge: rememberMe ? 30 * 24 * 60 * 60 * 1000 : 24 * 60 * 60 * 1000, // 30 days or 1 day
     });
+    // console.log("✅ Refresh Token set : ", refreshToken);
 
-    console.log(
-      `✅ Login berhasil: user_id=${user.user_id}, token_version=${user.token_version}`
-    );
+    // console.log(
+    //   `✅ Login berhasil: user_id=${user.user_id}, token_version=${user.token_version}`
+    // );
 
     return response(res, {
       statusCode: 200,

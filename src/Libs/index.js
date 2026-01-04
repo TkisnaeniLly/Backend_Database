@@ -24,6 +24,10 @@ function utilityAliases() {
     "sendLoginOtpEmail",
     path.join(__dirname, "Auth", "sendLoginOtpEmail.js")
   );
+  addAlias(
+    "validasiEditUser",
+    path.join(__dirname, "Home", "validasiEditUser.js")
+  );
 }
 
 module.exports = utilityAliases;

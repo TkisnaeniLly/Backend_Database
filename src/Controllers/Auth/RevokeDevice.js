@@ -40,9 +40,9 @@ const RevokeDevice = async (req, res) => {
       },
     });
 
-    console.log(
-      `✅ Device revoked: user_id=${user.user_id}, device_id=${device_id}`
-    );
+    // console.log(
+    //   `✅ Device revoked: user_id=${user.user_id}, device_id=${device_id}`
+    // );
 
     return response(res, {
       statusCode: 200,

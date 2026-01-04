@@ -24,9 +24,8 @@ app.use(
     origin: developmentStatus
       ? process.env.DEVELOPMENT_ORIGIN
       : process.env.PRODUCTION_ORIGIN,
-    // origin: process.env.ALLOWED_ORIGIN,
     methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
+    allowedHeaders: ["Content-Type", "Authorization", "Accept-Language"],
     credentials: true,
   })
 );

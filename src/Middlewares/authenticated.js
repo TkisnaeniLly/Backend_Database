@@ -28,7 +28,7 @@ const authenticated = async (req, res, next) => {
     let decoded;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
-      console.log("🔍 Decoded token:", decoded);
+      // console.log("🔍 Decoded token:", decoded);
     } catch (err) {
       console.warn("⛔ Token invalid / expired:", err.message);
       res.clearCookie("authToken");
@@ -56,18 +56,18 @@ const authenticated = async (req, res, next) => {
       });
     }
 
-    console.log("🔍 User from DB:", {
-      user_id: user.user_id,
-      email: user.email,
-      token_version: user.token_version,
-      status_akun: user.status_akun,
-    });
+    // console.log("🔍 User from DB:", {
+    //   user_id: user.user_id,
+    //   email: user.email,
+    //   token_version: user.token_version,
+    //   status_akun: user.status_akun,
+    // });
 
-    console.log("🔍 Comparing versions:", {
-      decoded_version: decoded.token_version,
-      db_version: user.token_version,
-      match: decoded.token_version === user.token_version,
-    });
+    // console.log("🔍 Comparing versions:", {
+    //   decoded_version: decoded.token_version,
+    //   db_version: user.token_version,
+    //   match: decoded.token_version === user.token_version,
+    // });
 
     if (decoded.token_version !== user.token_version) {
       console.warn(
@@ -103,7 +103,7 @@ const authenticated = async (req, res, next) => {
       .digest("hex")
       .substring(0, 32);
 
-    console.log("🔍 Device check:", { device_id });
+    // console.log("🔍 Device check:", { device_id });
 
     const device = await UserLoginDevice.findOne({
       where: {
@@ -113,7 +113,7 @@ const authenticated = async (req, res, next) => {
       },
     });
 
-    console.log("🔍 Device found:", device ? "YES" : "NO");
+    // console.log("🔍 Device found:", device ? "YES" : "NO");
 
     // Allow weak verification for dev if needed, but for now enforce strict
     if (!device) {
