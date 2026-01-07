@@ -10,8 +10,6 @@ const EmailVerification = require("./scripts/Auth/EmailVerification");
 const UserLoginDevice = require("./scripts/Auth/UserLoginDevice");
 const LoginOtp = require("./scripts/Auth/LoginOtp");
 const ResetPassword = require("./scripts/Auth/ResetPassword");
-const Device = require("./scripts/Auth/Device");
-
 
 // Catalog
 const Product = require("./scripts/Catalog/Product");
@@ -71,15 +69,6 @@ Variant.hasMany(Wishlist, {
 });
 Wishlist.belongsTo(Variant, {
   foreignKey: "variant_id",
-});
-
-//User -> Device (1 : 1)
-User.hasOne(Device, {
-  foreignKey: "user_id",
-  onDelete: "CASCADE",
-});
-Device.belongsTo(User, {
-  foreignKey: "user_id",
 });
 
 // User -> EmailVerification (1 : N)
@@ -267,7 +256,6 @@ module.exports = {
   UserLoginDevice,
   LoginOtp,
   ResetPassword,
-  Device,
 
   // Catalog
   Product,

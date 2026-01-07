@@ -27,6 +27,18 @@ router.get("/product/:slug", app.getProductBySlug);
 // Users => Home
 router.get("/home", authenticated, authorizeRole(["user"]), app.home);
 router.get("/beranda", authenticated, authorizeRole(["user"]), app.home);
+router.get(
+  "/wishlist",
+  authenticated,
+  authorizeRole(["user"]),
+  app.getWishList
+);
+router.post(
+  "/wishlist",
+  authenticated,
+  authorizeRole(["user"]),
+  app.postWishList
+);
 // User => Cart
 router.get("/cart", authenticated, authorizeRole(["user"]), app.getMyCart);
 router.post("/cart", authenticated, authorizeRole(["user"]), app.addToCart);

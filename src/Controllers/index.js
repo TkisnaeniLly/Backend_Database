@@ -2,6 +2,14 @@ const homePage = require("./Home");
 const home = async (req, res) => {
   return homePage(req, res);
 };
+const postWishListPage = require("./Home/postWishList");
+const postWishList = async (req, res) => {
+  return postWishListPage(req, res);
+};
+const getWishListPage = require("./Home/getWishList");
+const getWishList = async (req, res) => {
+  return getWishListPage(req, res);
+};
 
 //! Auth
 const registerPage = require("./Auth/Register");
@@ -110,6 +118,7 @@ const refreshToken = async (req, res) => {
 
 module.exports = {
   home,
+  // Auth
   register,
   verifyEmail,
   login,
@@ -119,18 +128,24 @@ module.exports = {
   refreshToken,
   getUserDevices,
   revokeDevice,
+  // Produk
   catalog,
   getProductBySlug,
   getFeaturedProducts,
+  // Cart
   addToCart,
   getMyCart,
   updateCartItem,
-
   deleteCartItem,
+  // Wishlist
+  postWishList,
+  getWishList,
+  // Checkout
   processCheckout,
   getCheckoutHistory,
   getCheckoutDetail,
   getCheckoutTracking,
+  // Auth
   requestResetPassword,
   resetPassword,
 };

@@ -29,7 +29,7 @@ const Logout = async (req, res) => {
       });
     }
 
-    await device.update({ is_verified: false });
+    // await device.update({ is_verified: false });
 
     const user = await User.findByPk(user_data.user_id);
     await user.increment("token_version");

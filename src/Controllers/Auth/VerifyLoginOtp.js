@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { LoginOtp, User, UserLoginDevice } = require("../../Models");
+const { LoginOtp, User, UserLoginDevice, Device } = require("../../Models");
 const response = require("response");
 
 const VerifyLoginOtp = async (req, res) => {
@@ -82,9 +82,10 @@ const VerifyLoginOtp = async (req, res) => {
     // );
 
     await otpData.update({ is_used: true });
+    const rememberMe = req.body.remember_me || false;
     await UserLoginDevice.update(
       {
-        is_verified: true,
+        is_verified: rememberMe,
         last_login_at: new Date(),
       },
       {
@@ -110,7 +111,6 @@ const VerifyLoginOtp = async (req, res) => {
     );
 
     // Refresh Token: 1 day or 30 days
-    const rememberMe = req.body.remember_me || false;
     const refreshTokenExpiry = rememberMe ? "30d" : "1d";
 
     const refreshToken = jwt.sign(
@@ -142,6 +142,7 @@ const VerifyLoginOtp = async (req, res) => {
       message: "Login berhasil.",
       data: {
         token: accessToken, // Frontend expects "token"
+        refreshToken: refreshToken,
         user: {
           user_id: user.user_id,
           email: user.email,
