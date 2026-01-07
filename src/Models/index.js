@@ -28,6 +28,9 @@ const CartItem = require("./scripts/Cart/CartItem");
 const Checkout = require("./scripts/Checkout/Checkout");
 const CheckoutTracking = require("./scripts/Checkout/CheckoutTracking");
 
+//User
+const Wishlist = require("./scripts/User/Wishlist");
+
 // ==================
 // Relasi Auth
 // ==================
@@ -39,6 +42,33 @@ User.hasOne(UserProfile, {
 });
 UserProfile.belongsTo(User, {
   foreignKey: "user_id",
+});
+
+//User -> Wishlist (1 : N)
+User.hasMany(Wishlist, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
+Wishlist.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+// Product -> Wishlist (1 : N)
+Product.hasMany(Wishlist, {
+  foreignKey: "product_id",
+  onDelete: "CASCADE",
+});
+Wishlist.belongsTo(Product, {
+  foreignKey: "product_id",
+});
+
+// Variant -> Wishlist (1 : N)
+Variant.hasMany(Wishlist, {
+  foreignKey: "variant_id",
+  onDelete: "CASCADE",
+});
+Wishlist.belongsTo(Variant, {
+  foreignKey: "variant_id",
 });
 
 // User -> EmailVerification (1 : N)
@@ -243,4 +273,7 @@ module.exports = {
   // Checkout
   Checkout,
   CheckoutTracking,
+
+  //User
+  Wishlist,
 };

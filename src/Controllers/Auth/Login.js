@@ -5,6 +5,7 @@ const { User, UserLoginDevice, LoginOtp } = require("../../Models");
 const response = require("response");
 const sendLoginOtpEmail = require("sendLoginOtpEmail");
 const generateLoginOtp = require("generateLoginOtp");
+const jwt = require("jsonwebtoken");
 
 const Login = async (req, res) => {
   try {
@@ -104,6 +105,78 @@ const Login = async (req, res) => {
         browser,
         os,
         device_type: deviceType,
+      });
+    }
+
+    const deviceVerified = device.is_verified;
+    console.log("Device Terferifikasi: ", deviceVerified);
+
+    if (deviceVerified) {
+      await UserLoginDevice.update(
+        {
+          last_login_at: new Date(),
+        },
+        {
+          where: {
+            user_id: user.user_id,
+            device_id,
+          },
+        }
+      );
+
+      await user.update({ last_login: new Date() });
+
+      // Access Token: 10 menit
+      const accessToken = jwt.sign(
+        {
+          user_id: user.user_id,
+          email: user.email,
+          role: user.role,
+          token_version: user.token_version,
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "10m" }
+      );
+
+      // Refresh Token: 30 days (since device is verified implies trust/remember me)
+      const refreshToken = jwt.sign(
+        {
+          user_id: user.user_id,
+          email: user.email,
+          token_version: user.token_version,
+          device_id: device_id,
+          type: "refresh",
+        },
+        process.env.JWT_SECRET,
+        { expiresIn: "30d" }
+      );
+
+      // Set Refresh Token in HttpOnly Cookie
+      res.cookie("refreshToken", refreshToken, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      });
+
+      console.log(
+        `✅ Login berhasil (Device Verified): user_id=${user.user_id}, token_version=${user.token_version}`
+      );
+
+      return response(res, {
+        statusCode: 200,
+        message: "Login berhasil.",
+        data: {
+          token: accessToken,
+          refreshToken: refreshToken,
+          user: {
+            user_id: user.user_id,
+            email: user.email,
+            full_name: user.full_name,
+            role: user.role,
+          },
+          expires_in: "10 menit",
+        },
       });
     }
 
