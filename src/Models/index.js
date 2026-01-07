@@ -19,6 +19,7 @@ const Media = require("./scripts/Catalog/Media");
 const Variant = require("./scripts/Catalog/Variant");
 const Inventory = require("./scripts/Catalog/Inventory");
 const ProductCategory = require("./scripts/Catalog/ProductCategory");
+const Wishlist = require("./scripts/Wishlist/Wishlist");
 
 // Cart
 const Cart = require("./scripts/Cart/Cart");
@@ -214,6 +215,28 @@ CheckoutTracking.belongsTo(Checkout, {
 });
 
 // ==================
+// Relasi Wishlist
+// ==================
+
+// User -> Wishlist (1 : N)
+User.hasMany(Wishlist, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
+Wishlist.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+// Product -> Wishlist (1 : N)
+Product.hasMany(Wishlist, {
+  foreignKey: "product_id",
+  onDelete: "CASCADE",
+});
+Wishlist.belongsTo(Product, {
+  foreignKey: "product_id",
+});
+
+// ==================
 // Export
 // ==================
 module.exports = {
@@ -243,4 +266,7 @@ module.exports = {
   // Checkout
   Checkout,
   CheckoutTracking,
+
+  // Wishlist
+  Wishlist,
 };

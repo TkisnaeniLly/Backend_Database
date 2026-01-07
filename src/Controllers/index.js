@@ -131,6 +131,22 @@ const checkUserRegistered = async (req, res) => {
   return checkUserRegisteredPage(req, res);
 };
 
+//! Wishlist
+const getWishlistPage = require("./wishlist/getWishlist");
+const getWishlist = async (req, res) => {
+  return getWishlistPage(req, res);
+};
+
+const addWishlistPage = require("./wishlist/addWishlist");
+const addWishlist = async (req, res) => {
+  return addWishlistPage(req, res);
+};
+
+const removeWishlistPage = require("./wishlist/removeWishlist");
+const removeWishlist = async (req, res) => {
+  return removeWishlistPage(req, res);
+};
+
 // Admin
 const adminPage = require("./Checkout/Admin");
 const paidVerify = async (req, res) => {
@@ -171,6 +187,10 @@ module.exports = {
   getCheckoutHistory,
   getCheckoutDetail,
   getCheckoutTracking,
+  // Wishlist
+  getWishlist,
+  addWishlist,
+  removeWishlist,
   // Admin
   paidVerify,
 };

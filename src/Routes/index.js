@@ -49,6 +49,22 @@ router.delete(
   authorizeRole(["user"]),
   app.deleteCartItem
 );
+// User => Wishlist
+router.get("/wishlist", authenticated, authorizeRole(["user"]), app.getWishlist);
+router.post("/wishlist", authenticated, authorizeRole(["user"]), app.addWishlist);
+router.delete(
+  "/wishlist",
+  authenticated,
+  authorizeRole(["user"]),
+  app.removeWishlist
+);
+router.delete(
+  "/wishlist/:id",
+  authenticated,
+  authorizeRole(["user"]),
+  app.removeWishlist
+);
+
 // User => Checkout
 router.post(
   "/checkout",
