@@ -5,6 +5,7 @@ const response = require("response");
 const RefreshToken = async (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
+    // console.log("🔍 Refresh Token:", refreshToken);
 
     if (!refreshToken) {
       return response(res, {
@@ -116,6 +117,7 @@ const RefreshToken = async (req, res) => {
     );
 
     console.log(`✅ Refreshed Access Token for user ${user.email}`);
+    console.log("New Access Token : ", newAccessToken);
 
     return response(res, {
       statusCode: 200,

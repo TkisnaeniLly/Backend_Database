@@ -2,6 +2,14 @@ const homePage = require("./Home");
 const home = async (req, res) => {
   return homePage(req, res);
 };
+const userProfilePage = require("./Home/userProfile");
+const userProfile = async (req, res) => {
+  return userProfilePage(req, res);
+};
+const editUserPage = require("./Home/editUser");
+const editUser = async (req, res) => {
+  return editUserPage(req, res);
+};
 
 //! Auth
 const registerPage = require("./Auth/Register");
@@ -98,9 +106,19 @@ const requestResetPassword = async (req, res) => {
   return requestResetPasswordPage(req, res);
 };
 
-const resetPasswordPage = require("./Auth/ResetPassword");
+const getResetPasswordPage = require("./Auth/GetResetPasswordPage");
 const resetPassword = async (req, res) => {
-  return resetPasswordPage(req, res);
+  return getResetPasswordPage(req, res);
+};
+
+const requestResetOtpPage = require("./Auth/RequestResetOtp");
+const requestResetOtp = async (req, res) => {
+  return requestResetOtpPage(req, res);
+};
+
+const executeResetPasswordPage = require("./Auth/ExecuteResetPassword");
+const executeResetPassword = async (req, res) => {
+  return executeResetPasswordPage(req, res);
 };
 
 const refreshTokenPage = require("./Auth/RefreshToken");
@@ -108,8 +126,23 @@ const refreshToken = async (req, res) => {
   return refreshTokenPage(req, res);
 };
 
+const checkUserRegisteredPage = require("./Auth/checkUserRegistered");
+const checkUserRegistered = async (req, res) => {
+  return checkUserRegisteredPage(req, res);
+};
+
+// Admin
+const adminPage = require("./Checkout/Admin");
+const paidVerify = async (req, res) => {
+  return adminPage.paidVerify(req, res);
+};
+
 module.exports = {
+  // User
   home,
+  userProfile,
+  editUser,
+  // Auth
   register,
   verifyEmail,
   login,
@@ -119,18 +152,25 @@ module.exports = {
   refreshToken,
   getUserDevices,
   revokeDevice,
+  requestResetPassword,
+  resetPassword,
+  requestResetOtp,
+  executeResetPassword,
+  checkUserRegistered,
+  // Product
   catalog,
   getProductBySlug,
   getFeaturedProducts,
+  // Cart
   addToCart,
   getMyCart,
   updateCartItem,
-
   deleteCartItem,
+  // Checkout
   processCheckout,
   getCheckoutHistory,
   getCheckoutDetail,
   getCheckoutTracking,
-  requestResetPassword,
-  resetPassword,
+  // Admin
+  paidVerify,
 };

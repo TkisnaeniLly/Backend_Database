@@ -1,158 +1,91 @@
-# Backend
+# Backend Database
 
-## 🚀 Menjalankan Backend
+Ini adalah repositori backend berbasis Express.js yang menyediakan API untuk sistem manajemen database produk dan user.
 
-### 1. Install dependency
+## Struktur Project
 
-```bash
-npm install
-```
+Berikut adalah penjelasan mengenai struktur folder yang ada di dalam direktori `./src`:
 
-### 2. Konfigurasi environment
+- **`src/Assets`**: Menyimpan file statis seperti gambar atau file publik lainnya yang dapat diakses secara langsung.
+- **`src/Config`**: Berisi konfigurasi aplikasi, khususnya koneksi ke database (misalnya menggunakan Sequelize).
+- **`src/Controllers`**: Berisi logika bisnis (business logic) aplikasi. Setiap fungsi di sini menangani request dari route dan mengembalikan response yang sesuai.
+- **`src/Libs`**: Direktori untuk fungsi bantuan (helper functions) dan library tambahan, seperti manajemen autentikasi, fungsi utilitas umum, dan lain-lain.
+- **`src/Middlewares`**: Berisi fungsi middleware Express yang dijalankan sebelum request mencapai controller. Contohnya: validasi autentikasi (`authenticated`), otorisasi role (`authorizeRole`), logging, dan penanganan error.
+- **`src/Models`**: Mendefinisikan struktur data atau skema database (menggunakan Sequelize Model). File-file di sini merepresentasikan tabel-tabel di database.
+- **`src/Routes`**: Menentukan endpoint API dan menghubungkannya dengan controller yang sesuai. Ini adalah pintu masuk untuk setiap request yang datang ke server.
+- **`src/Seeders`**: Berisi skrip untuk mengisi database dengan data awal (dummy data) untuk keperluan development atau testing.
 
-Ganti nama file `.env.sample` menjadi `.env`, lalu sesuaikan nilainya.
+## Persiapan Awal
 
-```env
-PORT=3000
-NODE_ENV=development
-```
+Sebelum menjalankan aplikasi (`npm run dev` atau `npm start`), ada beberapa langkah konfigurasi yang harus dilakukan agar aplikasi berjalan dengan lancar.
 
-### 3. Jalankan server
+### 1. Konfigurasi Environment Variable (.env)
 
-```bash
-npm run dev
-```
+Agar aplikasi dapat berjalan, kita perlu mengatur variabel lingkungan (environment variables).
 
----
-
-## 🖥 Contoh Log Terminal
-
-```text
-[nodemon] starting `node App.js`
-Registered aliases from index.js
-🚀 Server running on port 3000
-LOG REQUEST {
-  path: '/',
-  ipClient: '127.0.0.1',
-  hostname: 'localhost',
-  protocol: 'http',
-  method: 'GET',
-  dateTime: '15 Desember 2025 pukul 00.30 WIB'
-}
-```
-
----
-
-## 📡 Dokumentasi Routes / Endpoint
-
-Endpoint berikut disediakan oleh backend sebagai **REST API**.
-
----
-
-### 📍 User / Beranda (Protected)
-
-| Method | Endpoint       | Deskripsi                   | Auth |
-| ------ | -------------- | --------------------------- | ---- |
-| GET    | `/api/`        | Endpoint beranda (home API) | JWT  |
-| GET    | `/api/beranda` | Endpoint beranda (home API) | JWT  |
-| GET    | `/api/home`    | Endpoint beranda (home API) | JWT  |
-
-**Header wajib**
-
-```
-Authorization: Bearer <JWT_TOKEN>
-```
-
----
-
-### 🔐 Autentikasi
-
-| Method | Endpoint                 | Deskripsi                           | Auth |
-| ------ | ------------------------ | ----------------------------------- | ---- |
-| POST   | `/api/auth/register`     | Registrasi user baru                | ❌   |
-| GET    | `/api/auth/verify-email` | Verifikasi email user melalui token | ❌   |
-| POST   | `/api/auth/login`        | Login user (mengirim OTP ke email)  | ❌   |
-| PUT    | `/api/auth/verify-login` | Verifikasi OTP login & generate JWT | ❌   |
-| DELETE | `/api/auth/logout`       | Logout user & invalidasi sesi       | JWT  |
-
-Baca selengkapnya di [Dokumentasi Auth](Doc/authentikasi.md).
-
-#### 🔄 Alur Autentikasi
-
-```text
-Register
-   ↓
-Email verifikasi (link + token)
-   ↓
-Email terverifikasi
-   ↓
-Login (email + password)
-   ↓
-OTP dikirim ke email
-   ↓
-Verifikasi OTP
-   ↓
-JWT aktif
-   ↓
-Akses API terproteksi
-   ↓
-Logout
-```
-
----
-
-### 📦 Catalog / Produk
-
-| Method | Endpoint              | Deskripsi                            | Auth |
-| ------ | --------------------- | ------------------------------------ | ---- |
-| GET    | `/api/catalog`        | Ambil semua produk                   | ❌   |
-| GET    | `/api/catalog/:slug`  | Ambil detail produk berdasarkan slug | ❌   |
-| GET    | `/api/products`       | Ambil semua produk                   | ❌   |
-| GET    | `/api/products/:slug` | Ambil detail produk berdasarkan slug | ❌   |
-
-Baca selengkapnya di [Dokumentasi Products/Catalog](Doc/product.md).
-
----
-
-### 🛒 Cart / Keranjang
-
-| Method | Endpoint             | Deskripsi                     | Auth |
-| ------ | -------------------- | ----------------------------- | ---- |
-| GET    | `/api/cart`          | Ambil keranjang milik user    | JWT  |
-| POST   | `/api/cart/add`      | Tambah item ke keranjang      | JWT  |
-| PUT    | `/api/cart/update`   | Update qty & varian item cart | JWT  |
-| DELETE | `/api/cart/delete`   | Kurangi qty / hapus item cart | JWT  |
-| POST   | `/api/cart/checkout` | Checkout keranjang user       | JWT  |
-
-Baca selengkapnya di [Dokumentasi Cart](Doc/cart.md).
-
----
-
-## 🔐 Keamanan API
-
-- Semua request & response menggunakan format **JSON**
-- Endpoint terproteksi **wajib** menyertakan:
+- **Rename file configurasi**: Ubah nama file `.env.sample` menjadi `.env`.
+- **Mode Development**: Buka file `.env` dan ubah `NODE_ENV` menjadi `development`.
+  ```env
+  NODE_ENV=development
   ```
-  Authorization: Bearer <JWT_TOKEN>
+- **URL Frontend**: Sesuaikan `ALLOWED_ORIGIN` dengan URL frontend yang akan mengakses API ini (misalnya `http://localhost:5173`).
+  ```env
+  ALLOWED_ORIGIN="http://localhost:5173"
   ```
-- JWT berlaku selama **1 hari**
-- OTP login berlaku selama **5 menit**
-- Token verifikasi email bersifat **sekali pakai**
+- **Keamanan (Security)**: Pada bagian `# Security`, ganti nilai `...` dengan string acak (random) sepanjang 32 karakter (kombinsi huruf dan angka) untuk menjaga keamanan token.
+  ```env
+  JWT_SECRET="kombinasi_acak_32_karakter_di_sini"
+  ACCESS_TOKEN_SECRET="kombinasi_acak_32_karakter_di_sini"
+  REFRESH_TOKEN_SECRET="kombinasi_acak_32_karakter_di_sini"
+  ENCRYPTION_KEY="kombinasi_acak_32_karakter_di_sini"
+  ```
 
----
+### 2. Konfigurasi Database
 
-## 🧠 Dokumentasi App.js
+- **Buat Database**: Buat database baru di MySQL dengan nama `e-commerce_dev`.
+- **Sinkronisasi Database**: Jalankan perintah berikut untuk mensinkronkan struktur tabel ke database:
+  ```bash
+  node sync-db
+  ```
+- **Isi Data Awal (Seeding)**: Jalankan perintah berikut satu per satu untuk mengisi data awal (dummy data) agar aplikasi tidak kosong:
+  ```bash
+  node ./src/Seeders/unifiedProductSeeder.js
+  ```
 
-`App.js` berfungsi sebagai **entry point** aplikasi backend dengan alur:
+### 3. Konfigurasi Email (SMTP)
 
-1. Inisialisasi Express
-2. Registrasi middleware global
-3. Registrasi routes
-4. Menjalankan server berdasarkan `PORT` dari environment
+Untuk fitur pengiriman email (seperti verifikasi akun), kita menggunakan Gmail SMTP.
 
----
+- **App Password**: Buat "App Password" di akun Google Anda (karena login password biasa tidak aman untuk aplikasi pihak ketiga).
+- **Setup SMTP**: Di file `.env`, update konfigurasi SMTP:
+  ```env
+  SMTP_USER="emailvalidkamu@gmail.com"
+  SMTP_PASS="password_app_google_anda"
+  ```
+- **Domain yang Diizinkan (Opsional)**: Anda bisa membatasi domain email yang boleh mendaftar. Defaultnya `gmail.com`. Jika ingin menambah domain lain (misalnya email kampus), tambahkan dengan pemisah koma:
+  ```env
+  ALLOWED_DOMAIN_MAIL="gmail.com, mhs.stmik-tegal.ac.id"
+  ```
 
-## 📌 Baca terlebih dahulu file
+## Cara Menjalankan
 
-[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md), [CONTRIBUTING.md](CONTRIBUTING.md), dan [GIT_WORKFLOW.md](GIT_WORKFLOW.md)  
-agar tidak terjadi kesalahan saat mengembangkan aplikasi ini.
+1.  **Install dependencies:**
+
+    ```bash
+    npm install
+    ```
+
+2.  **Jalankan server (Development):**
+
+    ```bash
+    npm run dev
+    ```
+
+3.  **Jalankan server (Production):**
+    ```bash
+    npm start
+    ```
+
+## Lisensi
+
+[ISC](LICENSE)

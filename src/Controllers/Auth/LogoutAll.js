@@ -27,9 +27,9 @@ const LogoutAll = async (req, res) => {
       sameSite: "strict",
     });
 
-    console.log(
-      `✅ Logout dari semua device: user_id=${user.user_id}, total_devices=${updatedDevices[0]}`
-    );
+    // console.log(
+    //   `✅ Logout dari semua device: user_id=${user.user_id}, total_devices=${updatedDevices[0]}`
+    // );
 
     return response(res, {
       statusCode: 200,

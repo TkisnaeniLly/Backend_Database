@@ -1,7 +1,7 @@
 const crypto = require("crypto");
 const { User, EmailVerification } = require("../../Models");
 
-const renderPage = (title, message, icon = "success") => {
+const renderPage = (title, message, icon = "success", urlApp) => {
   return `
 <!DOCTYPE html>
 <html lang="id">
@@ -49,7 +49,7 @@ const renderPage = (title, message, icon = "success") => {
     allowEscapeKey: false,
     showConfirmButton: false
   }).then(() => {
-    window.location.href = "https://tishop.naxgrinting.my.id";
+    window.location.href = "${urlApp}";
   });
 </script>
 
@@ -62,12 +62,18 @@ const VerifyEmail = async (req, res) => {
   try {
     const { token } = req.query;
 
+    const urlApp =
+      process.env.NODE_ENV === "development"
+        ? process.env.DEVELOPMENT_ORIGIN
+        : process.env.ALLOWED_ORIGIN;
+
     if (!token) {
       return res.send(
         renderPage(
           "Verifikasi Gagal",
           "Token verifikasi tidak ditemukan.",
-          "error"
+          "error",
+          urlApp
         )
       );
     }
@@ -80,7 +86,12 @@ const VerifyEmail = async (req, res) => {
 
     if (!verification) {
       return res.send(
-        renderPage("Verifikasi Gagal", "Token verifikasi tidak valid.", "error")
+        renderPage(
+          "Verifikasi Gagal",
+          "Token verifikasi tidak valid.",
+          "error",
+          urlApp
+        )
       );
     }
 
@@ -89,7 +100,8 @@ const VerifyEmail = async (req, res) => {
         renderPage(
           "Email Sudah Diverifikasi",
           "Akun Anda sudah aktif sebelumnya.",
-          "info"
+          "info",
+          urlApp
         )
       );
     }
@@ -99,7 +111,8 @@ const VerifyEmail = async (req, res) => {
         renderPage(
           "Verifikasi Kedaluwarsa",
           "Token verifikasi sudah kedaluwarsa.",
-          "error"
+          "error",
+          urlApp
         )
       );
     }
@@ -108,7 +121,7 @@ const VerifyEmail = async (req, res) => {
 
     if (!user) {
       return res.send(
-        renderPage("Verifikasi Gagal", "User tidak ditemukan.", "error")
+        renderPage("Verifikasi Gagal", "User tidak ditemukan.", "error", urlApp)
       );
     }
 
@@ -122,7 +135,8 @@ const VerifyEmail = async (req, res) => {
       renderPage(
         "Verifikasi Berhasil",
         "Email berhasil diverifikasi. Akun Anda sudah aktif.",
-        "success"
+        "success",
+        urlApp + "/login"
       )
     );
   } catch (error) {
@@ -131,7 +145,8 @@ const VerifyEmail = async (req, res) => {
       renderPage(
         "Terjadi Kesalahan",
         "Internal Server Error. Silakan coba lagi.",
-        "error"
+        "error",
+        urlApp
       )
     );
   }

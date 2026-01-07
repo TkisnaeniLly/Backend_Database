@@ -12,7 +12,6 @@ const LoginOtp = require("./scripts/Auth/LoginOtp");
 const ResetPassword = require("./scripts/Auth/ResetPassword");
 const Device = require("./scripts/Auth/Device");
 
-
 // Catalog
 const Product = require("./scripts/Catalog/Product");
 const Category = require("./scripts/Catalog/Category");
@@ -115,6 +114,42 @@ User.hasMany(ResetPassword, {
   onDelete: "CASCADE",
 });
 ResetPassword.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+//User -> Wishlist (1 : N)
+User.hasMany(Wishlist, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
+Wishlist.belongsTo(User, {
+  foreignKey: "user_id",
+});
+
+// Product -> Wishlist (1 : N)
+Product.hasMany(Wishlist, {
+  foreignKey: "product_id",
+  onDelete: "CASCADE",
+});
+Wishlist.belongsTo(Product, {
+  foreignKey: "product_id",
+});
+
+// Variant -> Wishlist (1 : N)
+Variant.hasMany(Wishlist, {
+  foreignKey: "variant_id",
+  onDelete: "CASCADE",
+});
+Wishlist.belongsTo(Variant, {
+  foreignKey: "variant_id",
+});
+
+//User -> Device (1 : 1)
+User.hasOne(Device, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
+Device.belongsTo(User, {
   foreignKey: "user_id",
 });
 

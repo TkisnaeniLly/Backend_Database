@@ -63,7 +63,7 @@ const Login = async (req, res) => {
     if (user.status_akun !== "active") {
       return response(res, {
         statusCode: 403,
-        message: `Akun Anda berstatus ${user.status_akun}. Silakan hubungi administrator.`,
+        message: `Akun Anda berstatus ${user.status_akun}. Silakan cek email untuk verifikasi akun atau hubungi administrator.`,
         data: null,
       });
     }

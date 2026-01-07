@@ -1,14 +1,25 @@
 const response = require("response");
-const Checkout = require("../../Models/scripts/Checkout/Checkout");
-const Cart = require("../../Models/scripts/Cart/Cart");
-const CartItem = require("../../Models/scripts/Cart/CartItem");
-const Variant = require("../../Models/scripts/Catalog/Variant");
-const Inventory = require("../../Models/scripts/Catalog/Inventory");
+const { Op } = require("sequelize");
+const {
+  Checkout,
+  Cart,
+  CartItem,
+  Variant,
+  Inventory,
+  UserProfile,
+} = require("../../Models");
 
 const processCheckout = async (req, res) => {
   try {
-    const user_id = req.user.user_id; // Assumes user is attached to req by middleware
-    const { shipping_address, payment_method } = req.body;
+    const user_id = req.user.user_id;
+    let { shipping_address, payment_method, cart_item_ids } = req.body;
+
+    if (!shipping_address) {
+      const userProfile = await UserProfile.findOne({ where: { user_id } });
+      if (userProfile && userProfile.address) {
+        shipping_address = userProfile.address;
+      }
+    }
 
     if (!shipping_address || !payment_method) {
       return response(res, {
@@ -18,7 +29,6 @@ const processCheckout = async (req, res) => {
       });
     }
 
-    // Find active cart
     const cart = await Cart.findOne({
       where: { user_id, status: "ACTIVE" },
     });
@@ -31,9 +41,21 @@ const processCheckout = async (req, res) => {
       });
     }
 
-    // Get cart items to calculate total amount and validate stock
+    let filterWhere = { cart_id: cart.id };
+    let isPartialCheckout = false;
+
+    if (cart_item_ids) {
+      if (!Array.isArray(cart_item_ids)) {
+        cart_item_ids = [cart_item_ids];
+      }
+      if (cart_item_ids.length > 0) {
+        filterWhere.id = { [Op.in]: cart_item_ids };
+        isPartialCheckout = true;
+      }
+    }
+
     const cartItems = await CartItem.findAll({
-      where: { cart_id: cart.id },
+      where: filterWhere,
       include: [
         {
           model: Variant,
@@ -45,14 +67,21 @@ const processCheckout = async (req, res) => {
     if (cartItems.length === 0) {
       return response(res, {
         statusCode: 400,
-        message: "Keranjang kosong",
+        message: "Item yang dipilih tidak ditemukan di keranjang",
+        data: null,
+      });
+    }
+
+    if (isPartialCheckout && cartItems.length !== cart_item_ids.length) {
+      return response(res, {
+        statusCode: 400,
+        message: "Beberapa item tidak ditemukan atau tidak valid.",
         data: null,
       });
     }
 
     let total_amount = 0;
 
-    // Check stock and calculate total
     for (const item of cartItems) {
       if (!item.Variant || !item.Variant.Inventory) {
         return response(res, {
@@ -71,19 +100,36 @@ const processCheckout = async (req, res) => {
       total_amount += Number(item.Variant.price) * item.qty;
     }
 
-    // Create Checkout Record
+    let checkoutCartId = cart.id;
+
+    if (isPartialCheckout) {
+      const newCart = await Cart.create({
+        user_id,
+        status: "ACTIVE",
+      });
+
+      const itemIds = cartItems.map((item) => item.id);
+      await CartItem.update(
+        { cart_id: newCart.id },
+        { where: { id: { [Op.in]: itemIds } } }
+      );
+
+      checkoutCartId = newCart.id;
+    }
+
     const checkout = await Checkout.create({
       user_id,
-      cart_id: cart.id,
+      cart_id: checkoutCartId,
       total_amount,
       shipping_address,
       payment_method,
       status: "PENDING",
     });
 
-    // Update Cart Status
-    cart.status = "CHECKOUT";
-    await cart.save();
+    await Cart.update(
+      { status: "CHECKOUT" },
+      { where: { id: checkoutCartId } }
+    );
 
     return response(res, {
       statusCode: 200,
