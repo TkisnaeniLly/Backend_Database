@@ -126,6 +126,11 @@ const refreshToken = async (req, res) => {
   return refreshTokenPage(req, res);
 };
 
+const checkUserRegisteredPage = require("./Auth/checkUserRegistered");
+const checkUserRegistered = async (req, res) => {
+  return checkUserRegisteredPage(req, res);
+};
+
 // Admin
 const adminPage = require("./Checkout/Admin");
 const paidVerify = async (req, res) => {
@@ -151,6 +156,7 @@ module.exports = {
   resetPassword,
   requestResetOtp,
   executeResetPassword,
+  checkUserRegistered,
   // Product
   catalog,
   getProductBySlug,
