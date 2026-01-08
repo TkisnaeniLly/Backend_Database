@@ -10,7 +10,6 @@ const checkUserRegistered = async (req, res) => {
     const usernameRegex = /^[a-zA-Z0-9_]{3,20}$/;
     const phoneRegex = /^\d{10,14}$/;
 
-    // Ensure at least one field is provided
     if (!email && !username && !phone_number) {
       return response(res, {
         statusCode: 400,
@@ -19,7 +18,6 @@ const checkUserRegistered = async (req, res) => {
       });
     }
 
-    // Check Email
     if (email) {
       if (!emailRegex.test(email)) {
         return response(res, {
@@ -38,7 +36,6 @@ const checkUserRegistered = async (req, res) => {
       }
     }
 
-    // Check Username
     if (username) {
       if (!usernameRegex.test(username)) {
         return response(res, {
@@ -57,7 +54,6 @@ const checkUserRegistered = async (req, res) => {
       }
     }
 
-    // Check Phone Number (Dual Format Check: 08... and 628...)
     if (phone_number) {
       if (!phoneRegex.test(phone_number)) {
         return response(res, {
@@ -67,7 +63,6 @@ const checkUserRegistered = async (req, res) => {
         });
       }
 
-      // Generate both formats
       let phone0 = "";
       let phone62 = "";
 
@@ -78,12 +73,6 @@ const checkUserRegistered = async (req, res) => {
         phone62 = phone_number;
         phone0 = "0" + phone_number.substring(2);
       } else {
-        // If it starts with neither (e.g. 812...), assume it needs prefixing or just check as is + standard variants if possible.
-        // For safety, if it doesn't match standard patterns, strict check the input only,
-        // OR assume it's just a number and we try to construct standard forms if valid.
-        // Given regex validation passed \d{10,14}, we assume standard Indonesian format logic requested by user.
-        // Fallback: use input as matching one of the forms if possible, or just exact match.
-        // For this task, we focus on 08 vs 628 equivalence.
         phone0 = phone_number;
         phone62 = phone_number;
       }

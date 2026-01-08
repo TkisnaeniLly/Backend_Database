@@ -39,10 +39,8 @@ const paidVerify = async (req, res) => {
       });
     }
 
-    // Update status
     await checkout.update({ status: "PAID" });
 
-    // Add tracking history
     await CheckoutTracking.create({
       checkout_id: checkout.id,
       status: "PAID",

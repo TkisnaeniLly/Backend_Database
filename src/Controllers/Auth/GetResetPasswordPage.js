@@ -259,7 +259,6 @@ const GetResetPasswordPage = async (req, res) => {
       return res.status(400).send("Token tidak ditemukan.");
     }
 
-    // Optional: Check if token exists in DB to show specific error page
     const resetData = await ResetPassword.findOne({
       where: { token, is_used: false },
     });

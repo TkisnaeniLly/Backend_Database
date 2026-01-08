@@ -16,8 +16,6 @@ const registerSaveData = async (datas) => {
       status_akun: "pending",
     });
 
-    // console.log("Proses Register Save Data : ", proses);
-
     return {
       success: true,
       user_id: proses.user_id,

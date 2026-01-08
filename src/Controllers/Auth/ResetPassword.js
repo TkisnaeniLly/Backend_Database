@@ -4,7 +4,6 @@ const sendEmailReset = require("../../Libs/Auth/sendEmailReset");
 
 const ResetPassword = async (req, res) => {
   try {
-    // console.log("Reset Password Request Received");
     const { email } = req.body;
     if (!email) {
       return response(res, {
@@ -22,9 +21,8 @@ const ResetPassword = async (req, res) => {
       });
     }
 
-    // TODO: Verifikasi apakah email terdaftar di database
     const isEmailValid = await checkEmail(email);
-    // console.log("isEmailValid", isEmailValid);
+
     if (!isEmailValid) {
       return response(res, {
         statusCode: 400,
@@ -32,7 +30,7 @@ const ResetPassword = async (req, res) => {
         data: null,
       });
     }
-    // TODO: tambahkan logika untuk mengirim email reset password di sini
+
     const isEmailSent = await sendEmailReset(isEmailValid);
     if (!isEmailSent) {
       return response(res, {

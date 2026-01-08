@@ -216,7 +216,7 @@ const Login = async (req, res) => {
     }
 
     return response(res, {
-      statusCode: 200,
+      statusCode: 201,
       message:
         "OTP login telah dikirim ke email Anda. Silakan cek inbox atau folder spam.",
       data: {

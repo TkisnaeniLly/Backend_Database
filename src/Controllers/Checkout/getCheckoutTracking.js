@@ -7,7 +7,6 @@ const getCheckoutTracking = async (req, res) => {
     const user_id = req.user.user_id;
     const { id } = req.params;
 
-    // Verify ownership
     const checkout = await Checkout.findOne({
       where: { id, user_id },
     });

@@ -12,7 +12,6 @@ const getFeaturedProducts = async (req, res) => {
   try {
     const limit = parseInt(req.query.limit, 10) || 10;
 
-    // 1) fetch admin-marked featured products
     const featuredAdmin = await Product.findAll({
       where: { is_featured: true, status: "ACTIVE" },
       include: [
@@ -31,7 +30,6 @@ const getFeaturedProducts = async (req, res) => {
       ],
     });
 
-    // 2) compute top-selling products by summing cart_items.qty where checkout.status = 'PAID'
     const salesQuery = `
       SELECT p.id AS product_id, SUM(ci.qty) AS sold_qty
       FROM products p
@@ -49,7 +47,6 @@ const getFeaturedProducts = async (req, res) => {
       type: sequelize.QueryTypes.SELECT,
     });
 
-    // salesRows should be an array of rows; ensure it's an array
     const salesArray = Array.isArray(salesRows)
       ? salesRows
       : salesRows
@@ -57,7 +54,6 @@ const getFeaturedProducts = async (req, res) => {
       : [];
     const topIds = salesArray.map((r) => r.product_id).filter(Boolean);
 
-    // 3) fetch product records for top-selling ids, excluding admin-featured duplicates
     const adminIds = new Set(featuredAdmin.map((p) => p.id));
     const idsToFetch = topIds.filter((id) => !adminIds.has(id));
 
@@ -82,10 +78,8 @@ const getFeaturedProducts = async (req, res) => {
       });
     }
 
-    // merge: admin-featured first, then top-selling; limit final list to `limit`
     const merged = [...featuredAdmin, ...topProducts].slice(0, limit);
 
-    // format media urls
     const baseUrl = `${req.protocol}://${req.get("host")}`;
     const formatted = merged.map((p) => {
       const obj = p.toJSON();
@@ -95,7 +89,7 @@ const getFeaturedProducts = async (req, res) => {
           media_url: `${baseUrl}${m.media_url}`,
         }));
       }
-      // normalize CategoriesM2M -> Categories if needed
+
       if (obj.CategoriesM2M) {
         obj.Categories = obj.CategoriesM2M;
         delete obj.CategoriesM2M;

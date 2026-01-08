@@ -29,8 +29,6 @@ const Logout = async (req, res) => {
       });
     }
 
-    // await device.update({ is_verified: false });
-
     const user = await User.findByPk(user_data.user_id);
     await user.increment("token_version");
 
@@ -39,10 +37,6 @@ const Logout = async (req, res) => {
       secure: process.env.NODE_ENV === "production",
       sameSite: "strict",
     });
-
-    // console.log(
-    //   `✅ Logout berhasil: user_id=${user_data.user_id}, device_id=${device_id}`
-    // );
 
     return response(res, {
       statusCode: 200,

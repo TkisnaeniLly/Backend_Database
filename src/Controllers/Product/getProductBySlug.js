@@ -62,7 +62,6 @@ const getProductBySlug = async (req, res) => {
       });
     }
 
-    // normalize to JSON and media full URL
     const baseUrl = `${req.protocol}://${req.get("host")}`;
     const data = product.toJSON();
     if (Array.isArray(data.Media)) {
@@ -72,7 +71,6 @@ const getProductBySlug = async (req, res) => {
       }));
     }
 
-    // prefer `CategoriesM2M` array (many-to-many). If only legacy `Category` exists, convert.
     if (!Array.isArray(data.CategoriesM2M) && data.Category) {
       data.CategoriesM2M = [data.Category];
       delete data.Category;

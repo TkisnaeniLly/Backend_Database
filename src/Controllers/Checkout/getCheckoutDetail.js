@@ -44,7 +44,6 @@ const getCheckoutDetail = async (req, res) => {
       order: [["created_at", "DESC"]],
     });
 
-    // Combine data
     const data = {
       ...checkout.toJSON(),
       trackings,

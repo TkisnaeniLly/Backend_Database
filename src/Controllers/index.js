@@ -140,16 +140,6 @@ const paidVerify = async (req, res) => {
 module.exports = {
   // User
   home,
-  // Auth
-  register,
-  verifyEmail,
-  login,
-  verifyLogin,
-  logout,
-  logoutAll,
-  refreshToken,
-  getUserDevices,
-  revokeDevice,
   // Produk
   catalog,
   getProductBySlug,
@@ -170,4 +160,18 @@ module.exports = {
   // Auth
   requestResetPassword,
   resetPassword,
+  requestResetOtp,
+  executeResetPassword,
+  checkUserRegistered,
+  register,
+  verifyEmail,
+  login,
+  verifyLogin,
+  logout,
+  logoutAll,
+  refreshToken,
+  getUserDevices,
+  revokeDevice,
+  // Admin
+  paidVerify,
 };

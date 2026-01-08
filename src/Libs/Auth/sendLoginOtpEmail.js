@@ -38,9 +38,6 @@ const sendLoginOtpEmail = async (email, otp) => {
       `,
     });
 
-    // console.log("Email OTP berhasil dikirim ke:", email);
-    // console.log("Message ID:", info.messageId);
-
     return {
       success: true,
       message: "Email OTP berhasil dikirim.",

@@ -1,5 +1,5 @@
 const jwt = require("jsonwebtoken");
-const { User, UserLoginDevice } = require("../Models");
+const { User } = require("../Models");
 const crypto = require("crypto");
 
 const authenticated = async (req, res, next) => {
@@ -28,7 +28,6 @@ const authenticated = async (req, res, next) => {
     let decoded;
     try {
       decoded = jwt.verify(token, process.env.JWT_SECRET);
-      // console.log("🔍 Decoded token:", decoded);
     } catch (err) {
       console.warn("⛔ Token invalid / expired:", err.message);
       res.clearCookie("authToken");
@@ -55,19 +54,6 @@ const authenticated = async (req, res, next) => {
         data: null,
       });
     }
-
-    // console.log("🔍 User from DB:", {
-    //   user_id: user.user_id,
-    //   email: user.email,
-    //   token_version: user.token_version,
-    //   status_akun: user.status_akun,
-    // });
-
-    // console.log("🔍 Comparing versions:", {
-    //   decoded_version: decoded.token_version,
-    //   db_version: user.token_version,
-    //   match: decoded.token_version === user.token_version,
-    // });
 
     if (decoded.token_version !== user.token_version) {
       console.warn(
@@ -96,39 +82,11 @@ const authenticated = async (req, res, next) => {
     }
     const userAgent = req.headers["user-agent"] || "unknown";
 
-    // FIX: Generate device_id matching Login logic (IP + UserAgent + Email)
     const device_id = crypto
       .createHash("sha256")
       .update(`${ipAddress}-${userAgent}-${user.email}`)
       .digest("hex")
       .substring(0, 32);
-
-    // console.log("🔍 Device check:", { device_id });
-
-    const device = await UserLoginDevice.findOne({
-      where: {
-        user_id: user.user_id,
-        device_id: device_id,
-        is_verified: true,
-      },
-    });
-
-    // console.log("🔍 Device found:", device ? "YES" : "NO");
-
-    // Allow weak verification for dev if needed, but for now enforce strict
-    if (!device) {
-      console.warn(
-        `⛔ Device tidak terverifikasi: user_id=${user.user_id}, device_id=${device_id}`
-      );
-      // Don't clear cookie strictly here, let client handle 401? actually clear cookie is fine if session invalid
-      res.clearCookie("authToken");
-      return res.status(401).json({
-        statusCode: 401,
-        message:
-          "Sesi Anda tidak valid atau login dari perangkat baru. Silakan login kembali.",
-        data: null,
-      });
-    }
 
     req.user = {
       user_id: user.user_id,
@@ -137,7 +95,6 @@ const authenticated = async (req, res, next) => {
       device_id: device_id,
     };
 
-    // console.log("✅ Authenticated:", req.user);
     next();
   } catch (error) {
     console.error("❌ Middleware Auth Error:", error);

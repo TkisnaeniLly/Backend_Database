@@ -8,7 +8,6 @@ const getCatalog = async (req, res) => {
     const products = await Product.findAll({
       where: { status: "ACTIVE" },
       include: [
-        // include many-to-many categories via product_categories
         {
           model: Category,
           as: "CategoriesM2M",
@@ -31,11 +30,8 @@ const getCatalog = async (req, res) => {
       order: [["created_at", "DESC"]],
     });
 
-    // 🔥 inject full image url
     const formattedProducts = products.map((product) => {
       const data = product.toJSON();
-
-      // normalize Media full url
       if (Array.isArray(data.Media)) {
         data.Media = data.Media.map((media) => ({
           ...media,
@@ -43,9 +39,7 @@ const getCatalog = async (req, res) => {
         }));
       }
 
-      // ensure categories returned as `CategoriesM2M` array (many-to-many)
       if (!Array.isArray(data.CategoriesM2M) && data.Category) {
-        // fallback: keep legacy Category as single-element array
         data.CategoriesM2M = [data.Category];
         delete data.Category;
       }

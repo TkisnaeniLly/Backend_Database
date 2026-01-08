@@ -5,16 +5,12 @@ const getUserProfile = async (req, res) => {
   try {
     const user_id = req.user.user_id;
 
-    // Fetch User with UserProfile
     const user = await User.findByPk(user_id, {
       include: {
         model: UserProfile,
         attributes: ["address", "avatar"],
       },
     });
-
-    // console.log("User ID : ", user_id);
-    // console.log("Data User : ", user);
 
     if (!user) {
       return response(res, {

@@ -5,7 +5,6 @@ const response = require("response");
 const RefreshToken = async (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
-    // console.log("🔍 Refresh Token:", refreshToken);
 
     if (!refreshToken) {
       return response(res, {
@@ -36,7 +35,6 @@ const RefreshToken = async (req, res) => {
       });
     }
 
-    // Periksa apakah ini benar-benar refresh token
     if (decoded.type !== "refresh") {
       return response(res, {
         statusCode: 403,
@@ -65,7 +63,6 @@ const RefreshToken = async (req, res) => {
       });
     }
 
-    // Cek Token Version
     if (decoded.token_version !== user.token_version) {
       res.clearCookie("refreshToken");
       return response(res, {
@@ -75,7 +72,6 @@ const RefreshToken = async (req, res) => {
       });
     }
 
-    // Cek Status Akun
     if (user.status_akun !== "active") {
       res.clearCookie("refreshToken");
       return response(res, {
@@ -85,7 +81,6 @@ const RefreshToken = async (req, res) => {
       });
     }
 
-    // Validasi Device
     const device = await UserLoginDevice.findOne({
       where: {
         user_id: user.user_id,
@@ -103,7 +98,6 @@ const RefreshToken = async (req, res) => {
       });
     }
 
-    // Issue New Access Token
     const newAccessToken = jwt.sign(
       {
         user_id: user.user_id,

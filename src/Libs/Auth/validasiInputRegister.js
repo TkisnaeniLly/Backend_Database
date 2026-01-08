@@ -71,14 +71,6 @@ const ValidasiInputRegister = async (datas) => {
       datas.full_name,
     ]);
 
-    /**
-     * score:
-     * 0 = sangat lemah
-     * 1 = lemah
-     * 2 = cukup
-     * 3 = kuat
-     * 4 = sangat kuat
-     */
     if (passwordCheck.score < 3) {
       return {
         success: false,

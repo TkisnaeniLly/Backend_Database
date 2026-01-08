@@ -22,7 +22,6 @@ const wishList = async (req, res) => {
       });
     }
 
-    // Check if duplicate in wishlist relative to user
     const existingWishlist = await WishList.Wishlist.findOne({
       where: {
         user_id: user.user_id,
@@ -38,10 +37,8 @@ const wishList = async (req, res) => {
       });
     }
 
-    // Check if variant exists in database (Variant Model)
     const variant = await WishList.Variant.findByPk(variant_id);
     if (!variant) {
-      // If not found in database, it's a 404 error
       return response(res, {
         statusCode: 404,
         message: "Variant tidak ditemukan.",
@@ -49,7 +46,6 @@ const wishList = async (req, res) => {
       });
     }
 
-    // Add to wishlist
     const newWishlist = await WishList.Wishlist.create({
       user_id: user.user_id,
       variant_id,

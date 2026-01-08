@@ -100,7 +100,6 @@ const updateCartItem = async (req, res) => {
         });
       }
 
-      // Jika belum ada → update variant
       item.variant_id = variant_id;
     }
 

@@ -8,7 +8,6 @@ const editUser = async (req, res) => {
     const user_id = req.user.user_id;
     const data = req.body;
 
-    // 1. Validasi Input
     const validasi = await validasiEditUser(data, user_id);
     if (!validasi.success) {
       await transaction.rollback();
@@ -19,7 +18,6 @@ const editUser = async (req, res) => {
       });
     }
 
-    // 2. Update Data User
     const userDataToUpdate = {};
     if (data.username) userDataToUpdate.username = data.username;
     if (data.email) userDataToUpdate.email = data.email;
@@ -28,7 +26,6 @@ const editUser = async (req, res) => {
     if (data.gender) userDataToUpdate.gender = data.gender;
     if (data.birth_date) userDataToUpdate.birth_date = data.birth_date;
 
-    // Hanya update jika ada data yang dikirim
     if (Object.keys(userDataToUpdate).length > 0) {
       await User.update(userDataToUpdate, {
         where: { user_id },
@@ -36,37 +33,28 @@ const editUser = async (req, res) => {
       });
     }
 
-    // 3. Update Data UserProfile (Address & Avatar)
     const userProfileDataToUpdate = {};
     if (data.address) userProfileDataToUpdate.address = data.address;
 
-    // Handle Avatar Upload
     if (req.file) {
-      // Simpan path relative atau URL full, tergantung kebutuhan frontend.
-      // Di sini simpan path relative dari root static folder
-      // e.g., /images/users/filename.jpg
       const avatarPath = `/images/users/${req.file.filename}`;
       userProfileDataToUpdate.avatar = avatarPath;
     } else if (data.avatar) {
-      // Jika dikirim string (misal null atau url external jika supported)
       userProfileDataToUpdate.avatar = data.avatar;
     }
 
     if (Object.keys(userProfileDataToUpdate).length > 0) {
-      // Cek apakah UserProfile sudah ada
       const userProfile = await UserProfile.findOne({
         where: { user_id },
         transaction,
       });
 
       if (userProfile) {
-        // Update jika ada
         await UserProfile.update(userProfileDataToUpdate, {
           where: { user_id },
           transaction,
         });
       } else {
-        // Create jika belum ada
         await UserProfile.create(
           {
             user_id,
@@ -79,7 +67,6 @@ const editUser = async (req, res) => {
 
     await transaction.commit();
 
-    // 4. Fetch Updated Data untuk response
     const updatedUser = await User.findByPk(user_id, {
       include: {
         model: UserProfile,

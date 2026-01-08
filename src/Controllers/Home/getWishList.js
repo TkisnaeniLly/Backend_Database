@@ -21,7 +21,7 @@ const wishList = async (req, res) => {
           include: [
             {
               model: WishList.Media,
-              limit: 1, // Only get one image for thumbnail
+              limit: 1,
             },
           ],
         },

@@ -22,7 +22,6 @@ const ExecuteResetPassword = async (req, res) => {
       });
     }
 
-    // Password strength validation (Simple: min 6 chars)
     if (password.length < 6) {
       return response(res, {
         statusCode: 400,
@@ -64,16 +63,12 @@ const ExecuteResetPassword = async (req, res) => {
       });
     }
 
-    // Hash new password
     const salt = await bcrypt.genSalt(10);
     const hashedPassword = await bcrypt.hash(password, salt);
 
-    // Update User Password
     await user.update({ password: hashedPassword });
 
-    // Mark Reset Token as used or Delete
-    // Prompt says: "hapus data user pada reset_password"
-    await resetData.destroy(); // Or .update({ is_used: true }) if you want to keep history, but prompt says "hapus".
+    await resetData.destroy();
 
     return response(res, {
       statusCode: 200,
