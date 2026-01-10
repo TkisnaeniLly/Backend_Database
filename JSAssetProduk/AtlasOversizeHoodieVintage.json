@@ -1,0 +1,31 @@
+{
+    "product_name": "Atlas Oversize Hoodie Vintage",
+    "description": "Hoodie oversize dengan desain vintage yang nyaman digunakan sehari-hari.",
+    "brand": "Atlas",
+    "is_featured": false,
+    "category": {
+        "main": "hoodie",
+        "additional": [
+            "pria",
+            "lifestyle"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/AtlasOversizeHoodieVintage.webp",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "L",
+            "price": 349000,
+            "inventory": {
+                "stock_qty": 25,
+                "stock_minimum": 5,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

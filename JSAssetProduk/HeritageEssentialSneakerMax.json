@@ -1,0 +1,31 @@
+{
+    "product_name": "Heritage Essential Sneaker Max",
+    "description": "Sneaker heritage max yang menggabungkan desain klasik dengan kenyamanan modern.",
+    "brand": "Heritage",
+    "is_featured": false,
+    "category": {
+        "main": "sneaker",
+        "additional": [
+            "pria",
+            "alas-kaki"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/HeritageEssentialSneakerMax.webp",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "43",
+            "price": 649000,
+            "inventory": {
+                "stock_qty": 8,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

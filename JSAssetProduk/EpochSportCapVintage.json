@@ -1,0 +1,31 @@
+{
+    "product_name": "Epoch Sport Cap Vintage",
+    "description": "Topi sport dengan gaya vintage yang ringan dan nyaman dipakai seharian.",
+    "brand": "Epoch",
+    "is_featured": false,
+    "category": {
+        "main": "cap",
+        "additional": [
+            "aksesoris",
+            "sport"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/EpochSportCapVintage.jpg",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "ALL SIZE",
+            "price": 145000,
+            "inventory": {
+                "stock_qty": 30,
+                "stock_minimum": 5,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}
