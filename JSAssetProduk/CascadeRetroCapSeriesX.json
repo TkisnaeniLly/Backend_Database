@@ -1,0 +1,31 @@
+{
+    "product_name": "Cascade Retro Cap Series X",
+    "description": "Topi retro dari seri X yang memberikan kesan klasik dan sporty.",
+    "brand": "Cascade",
+    "is_featured": false,
+    "category": {
+        "main": "cap",
+        "additional": [
+            "aksesoris",
+            "sporty"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/CascadeRetroCapSeriesX.webp",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "ALL SIZE",
+            "price": 129000,
+            "inventory": {
+                "stock_qty": 50,
+                "stock_minimum": 10,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}
