@@ -4,9 +4,9 @@
     "brand": "Compass",
     "is_featured": false,
     "category": {
-        "main": "outerwear",
+        "main": "Outer",
         "additional": [
-            "pria",
+            "Pria",
             "premium"
         ]
     },
