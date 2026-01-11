@@ -1,0 +1,70 @@
+{
+    "product_name": "Equil Neo Zeon Street Kicks",
+    "description": "Sepatu street wear dengan tema Neo Zeon dari Equil.",
+    "brand": "Equil",
+    "is_featured": false,
+    "category": {
+        "main": "Sepatu",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/EquilNeoZeonStreetKicks.webp",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "40",
+            "price": 549000,
+            "inventory": {
+                "stock_qty": 5,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "41",
+            "price": 549000,
+            "inventory": {
+                "stock_qty": 10,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "42",
+            "price": 549000,
+            "inventory": {
+                "stock_qty": 15,
+                "stock_minimum": 3,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "43",
+            "price": 549000,
+            "inventory": {
+                "stock_qty": 8,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "44",
+            "price": 549000,
+            "inventory": {
+                "stock_qty": 4,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

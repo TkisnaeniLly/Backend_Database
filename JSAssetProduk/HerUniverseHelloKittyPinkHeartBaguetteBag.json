@@ -1,0 +1,30 @@
+{
+    "product_name": "Her Universe Hello Kitty Pink Heart Baguette Bag",
+    "description": "Tas baguette berbentuk hati berwarna merah muda dengan tema Hello Kitty dari Her Universe.",
+    "brand": "Her Universe",
+    "is_featured": false,
+    "category": {
+        "main": "Aksesoris",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/HerUniverseHelloKittyPinkHeartBaguetteBag.webp",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "ONE SIZE",
+            "price": 0,
+            "inventory": {
+                "stock_qty": 0,
+                "stock_minimum": 0,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

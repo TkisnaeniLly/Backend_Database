@@ -1,18 +1,17 @@
 {
-    "product_name": "Epoch Sport Cap Vintage",
-    "description": "Topi sport dengan gaya vintage yang ringan dan nyaman dipakai seharian.",
-    "brand": "Epoch",
+    "product_name": "Yalan Loth Jotaro Hat",
+    "description": "Topi gaya Jotaro Kujo yang unik dari Yalan Loth.",
+    "brand": "Yalan Loth",
     "is_featured": false,
     "category": {
         "main": "Topi",
         "additional": [
-            "Aksesoris",
-            "sport"
+            "Pria & Wanita"
         ]
     },
     "media": [
         {
-            "media_url": "/images/products/EpochSportCapVintage.jpg",
+            "media_url": "/images/products/YalanLothJotaroHat.jpg",
             "position": 1
         }
     ],
@@ -20,10 +19,10 @@
         {
             "variant_type": "SIZE",
             "variant_value": "ALL SIZE",
-            "price": 145000,
+            "price": 0,
             "inventory": {
-                "stock_qty": 30,
-                "stock_minimum": 5,
+                "stock_qty": 0,
+                "stock_minimum": 0,
                 "stock_status": "AVAILABLE"
             }
         }

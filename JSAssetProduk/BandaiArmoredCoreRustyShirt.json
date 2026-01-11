@@ -1,0 +1,60 @@
+{
+    "product_name": "Bandai Armored Core Rusty Shirt",
+    "description": "T-Shirt eksklusif Bandai dengan desain Armored Core Rusty.",
+    "brand": "Bandai",
+    "is_featured": false,
+    "category": {
+        "main": "T-Shirt",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/BandaiArmoredCoreRustyShirt.jpg",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "S",
+            "price": 149000,
+            "inventory": {
+                "stock_qty": 25,
+                "stock_minimum": 5,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "M",
+            "price": 149000,
+            "inventory": {
+                "stock_qty": 30,
+                "stock_minimum": 5,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "L",
+            "price": 149000,
+            "inventory": {
+                "stock_qty": 20,
+                "stock_minimum": 5,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "XL",
+            "price": 159000,
+            "inventory": {
+                "stock_qty": 15,
+                "stock_minimum": 3,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

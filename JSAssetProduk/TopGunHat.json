@@ -1,18 +1,17 @@
 {
-    "product_name": "Cascade Retro Cap Series X",
-    "description": "Topi retro dari seri X yang memberikan kesan klasik dan sporty.",
-    "brand": "Cascade",
+    "product_name": "Top Gun Hat",
+    "description": "Topi bergaya navy yang ikonik dari film Top Gun.",
+    "brand": "Top Gun",
     "is_featured": false,
     "category": {
         "main": "Topi",
         "additional": [
-            "Aksesoris",
-            "sporty"
+            "Pria & Wanita"
         ]
     },
     "media": [
         {
-            "media_url": "/images/products/CascadeRetroCapSeriesX.webp",
+            "media_url": "/images/products/TopGunHat.webp",
             "position": 1
         }
     ],
@@ -20,10 +19,10 @@
         {
             "variant_type": "SIZE",
             "variant_value": "ALL SIZE",
-            "price": 129000,
+            "price": 0,
             "inventory": {
-                "stock_qty": 50,
-                "stock_minimum": 10,
+                "stock_qty": 0,
+                "stock_minimum": 0,
                 "stock_status": "AVAILABLE"
             }
         }
