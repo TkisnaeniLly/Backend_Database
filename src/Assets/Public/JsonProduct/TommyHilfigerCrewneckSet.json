@@ -1,0 +1,40 @@
+{
+    "product_name": "Tommy Hilfiger Crewneck Set",
+    "description": "Setelan crewneck sweatshirt dari Tommy Hilfiger dengan desain klasik dan nyaman.",
+    "brand": "Tommy Hilfiger",
+    "is_featured": false,
+    "category": {
+        "main": "Hoodie",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/TommyHilfigerCrewneckSet.jpeg",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "M",
+            "price": 3500000,
+            "inventory": {
+                "stock_qty": 20,
+                "stock_minimum": 5,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "L",
+            "price": 3500000,
+            "inventory": {
+                "stock_qty": 15,
+                "stock_minimum": 3,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

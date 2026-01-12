@@ -1,0 +1,30 @@
+{
+    "product_name": "Ralph Lauren Canvas Backpack",
+    "description": "Ransel kanvas tangguh dari Ralph Lauren dengan logo kuda yang ikonik.",
+    "brand": "Ralph Lauren",
+    "is_featured": false,
+    "category": {
+        "main": "Aksesoris",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/RalphLaurenCanvasBackpack.jpeg",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "ONE SIZE",
+            "price": 4500000,
+            "inventory": {
+                "stock_qty": 10,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

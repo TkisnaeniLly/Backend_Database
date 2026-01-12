@@ -1,0 +1,50 @@
+{
+    "product_name": "Gucci GG Wool Boucle Cardigan",
+    "description": "Cardigan mewah dari Gucci dengan bahan wool boucle dan motif jacquard GG yang ikonik.",
+    "brand": "Gucci",
+    "is_featured": false,
+    "category": {
+        "main": "Luaran",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/GucciGGWoolBoucleCardigan.webp",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "S",
+            "price": 15000000,
+            "inventory": {
+                "stock_qty": 5,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "M",
+            "price": 15000000,
+            "inventory": {
+                "stock_qty": 8,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "L",
+            "price": 15000000,
+            "inventory": {
+                "stock_qty": 6,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "product_name": "The North Face Nuptse Puffer",
+    "description": "Jaket puffer legendaris dari The North Face dengan isolasi bulu angsa yang sangat hangat.",
+    "brand": "The North Face",
+    "is_featured": false,
+    "category": {
+        "main": "Jaket",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/TheNorthFaceNuptsePuffer.jpeg",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "M",
+            "price": 5500000,
+            "inventory": {
+                "stock_qty": 7,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "L",
+            "price": 5500000,
+            "inventory": {
+                "stock_qty": 10,
+                "stock_minimum": 3,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "XL",
+            "price": 5700000,
+            "inventory": {
+                "stock_qty": 5,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

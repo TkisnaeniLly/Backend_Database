@@ -1,0 +1,30 @@
+{
+    "product_name": "Classic Cotton Cap",
+    "description": "Topi katun klasik yang nyaman dan cocok untuk melengkapi gaya kasual Anda.",
+    "brand": "Generic",
+    "is_featured": false,
+    "category": {
+        "main": "Topi",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/ClassicCottonCap.jpeg",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "ALL SIZE",
+            "price": 250000,
+            "inventory": {
+                "stock_qty": 50,
+                "stock_minimum": 10,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

@@ -1,0 +1,40 @@
+{
+    "product_name": "Dior Oblique Striped Set",
+    "description": "Setelan elegan dari Dior dengan motif oblique dan detail garis yang ikonik.",
+    "brand": "Dior",
+    "is_featured": false,
+    "category": {
+        "main": "Pakaian",
+        "additional": [
+            "Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/DiorObliqueStripedSet.jpg",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "S",
+            "price": 25000000,
+            "inventory": {
+                "stock_qty": 2,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "M",
+            "price": 25000000,
+            "inventory": {
+                "stock_qty": 3,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

@@ -1,0 +1,50 @@
+{
+    "product_name": "Thom Browne Oxford Shirt",
+    "description": "Kemeja oxford premium dari Thom Browne dengan detail tab tri-warna yang ikonik.",
+    "brand": "Thom Browne",
+    "is_featured": false,
+    "category": {
+        "main": "Kaos",
+        "additional": [
+            "Pria"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/ThomBrowneOxfordShirt.png",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "2",
+            "price": 7500000,
+            "inventory": {
+                "stock_qty": 8,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "3",
+            "price": 7500000,
+            "inventory": {
+                "stock_qty": 10,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "4",
+            "price": 7500000,
+            "inventory": {
+                "stock_qty": 6,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

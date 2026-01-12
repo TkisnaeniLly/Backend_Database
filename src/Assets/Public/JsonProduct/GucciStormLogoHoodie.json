@@ -1,0 +1,40 @@
+{
+    "product_name": "Gucci Storm Logo Hoodie",
+    "description": "Hoodie sweatshirt dari Gucci dengan print logo Storm yang modern dan stylish.",
+    "brand": "Gucci",
+    "is_featured": false,
+    "category": {
+        "main": "Hoodie",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/GucciStormLogoHoodie.webp",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "M",
+            "price": 12000000,
+            "inventory": {
+                "stock_qty": 10,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "L",
+            "price": 12000000,
+            "inventory": {
+                "stock_qty": 12,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}
