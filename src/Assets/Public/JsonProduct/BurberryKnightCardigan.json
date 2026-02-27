@@ -1,0 +1,50 @@
+{
+    "product_name": "Burberry Knight Cardigan",
+    "description": "Cardigan unik dari Burberry dengan motif ksatria berkuda yang ditenun halus.",
+    "brand": "Burberry",
+    "is_featured": false,
+    "category": {
+        "main": "Luaran",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/BurberryKnightCardigan.png",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "S",
+            "price": 11500000,
+            "inventory": {
+                "stock_qty": 4,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "M",
+            "price": 11500000,
+            "inventory": {
+                "stock_qty": 6,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "L",
+            "price": 11500000,
+            "inventory": {
+                "stock_qty": 5,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

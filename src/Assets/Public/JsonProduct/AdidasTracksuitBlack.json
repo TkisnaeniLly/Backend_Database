@@ -1,0 +1,60 @@
+{
+    "product_name": "Adidas Tracksuit Black",
+    "description": "Setelan tracksuit Adidas berwarna hitam yang sporty dan nyaman.",
+    "brand": "Adidas",
+    "is_featured": false,
+    "category": {
+        "main": "Jaket",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/AdidasTracksuitBlack.jpg",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "S",
+            "price": 249000,
+            "inventory": {
+                "stock_qty": 15,
+                "stock_minimum": 3,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "M",
+            "price": 249000,
+            "inventory": {
+                "stock_qty": 20,
+                "stock_minimum": 5,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "L",
+            "price": 249000,
+            "inventory": {
+                "stock_qty": 18,
+                "stock_minimum": 4,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "XL",
+            "price": 259000,
+            "inventory": {
+                "stock_qty": 10,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

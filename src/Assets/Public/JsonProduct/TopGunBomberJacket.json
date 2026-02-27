@@ -1,0 +1,60 @@
+{
+    "product_name": "Top Gun Bomber Jacket",
+    "description": "Jaket bomber klasik yang terinspirasi dari film Top Gun.",
+    "brand": "Top Gun",
+    "is_featured": false,
+    "category": {
+        "main": "Jaket",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/TopGunBomberJacket.webp",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "S",
+            "price": 349000,
+            "inventory": {
+                "stock_qty": 5,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "M",
+            "price": 349000,
+            "inventory": {
+                "stock_qty": 10,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "L",
+            "price": 349000,
+            "inventory": {
+                "stock_qty": 12,
+                "stock_minimum": 2,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "XL",
+            "price": 369000,
+            "inventory": {
+                "stock_qty": 6,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

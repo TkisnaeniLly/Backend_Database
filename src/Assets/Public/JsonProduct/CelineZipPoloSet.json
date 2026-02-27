@@ -1,0 +1,40 @@
+{
+    "product_name": "Celine Zip Polo Set",
+    "description": "Setelan polo zip modern dari Celine dengan desain minimalis dan material premium.",
+    "brand": "Celine",
+    "is_featured": false,
+    "category": {
+        "main": "Pakaian",
+        "additional": [
+            "Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/CelineZipPoloSet.jpeg",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "XS",
+            "price": 18000000,
+            "inventory": {
+                "stock_qty": 4,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "S",
+            "price": 18000000,
+            "inventory": {
+                "stock_qty": 6,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

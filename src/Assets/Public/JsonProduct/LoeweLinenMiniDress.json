@@ -1,0 +1,50 @@
+{
+    "product_name": "Loewe Linen Mini Dress",
+    "description": "Mini dress elegan dari koleksi Loewe Paula's Ibiza, terbuat dari campuran linen berkualitas.",
+    "brand": "Loewe",
+    "is_featured": false,
+    "category": {
+        "main": "Pakaian",
+        "additional": [
+            "Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/LoeweLinenMiniDress.webp",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "XS",
+            "price": 9500000,
+            "inventory": {
+                "stock_qty": 3,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "S",
+            "price": 9500000,
+            "inventory": {
+                "stock_qty": 5,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        },
+        {
+            "variant_type": "SIZE",
+            "variant_value": "M",
+            "price": 9500000,
+            "inventory": {
+                "stock_qty": 4,
+                "stock_minimum": 1,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+{
+    "product_name": "Yalan Loth Jotaro Hat",
+    "description": "Topi gaya Jotaro Kujo yang unik dari Yalan Loth.",
+    "brand": "Yalan Loth",
+    "is_featured": false,
+    "category": {
+        "main": "Topi",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/YalanLothJotaroHat.jpg",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "ALL SIZE",
+            "price": 0,
+            "inventory": {
+                "stock_qty": 0,
+                "stock_minimum": 0,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}

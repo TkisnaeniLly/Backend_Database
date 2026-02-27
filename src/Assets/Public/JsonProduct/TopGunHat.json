@@ -1,0 +1,30 @@
+{
+    "product_name": "Top Gun Hat",
+    "description": "Topi bergaya navy yang ikonik dari film Top Gun.",
+    "brand": "Top Gun",
+    "is_featured": false,
+    "category": {
+        "main": "Topi",
+        "additional": [
+            "Pria & Wanita"
+        ]
+    },
+    "media": [
+        {
+            "media_url": "/images/products/TopGunHat.webp",
+            "position": 1
+        }
+    ],
+    "variants": [
+        {
+            "variant_type": "SIZE",
+            "variant_value": "ALL SIZE",
+            "price": 0,
+            "inventory": {
+                "stock_qty": 0,
+                "stock_minimum": 0,
+                "stock_status": "AVAILABLE"
+            }
+        }
+    ]
+}
